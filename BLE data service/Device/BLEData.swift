@@ -11,6 +11,9 @@ class BLEData: NSObject, ObservableObject{
     
     var message : [String]
     var sender : String
+    let currentDateTime = Date()
+    
+
     
     init(data : String) {
         let dataArr : [String] = data.components(separatedBy: "=")
@@ -26,6 +29,8 @@ class BLEData: NSObject, ObservableObject{
         
         self.message = cleenDataArr
         self.sender = dataArr[0]
+        
+
     }
     
     
@@ -41,6 +46,12 @@ class BLEData: NSObject, ObservableObject{
     
     func getSender() -> String {
         return sender
+    }
+    
+    func getDataAsString() -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss E, d MMM y"
+        return formatter.string(from: self.currentDateTime)
     }
     
 }

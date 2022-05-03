@@ -31,13 +31,13 @@ struct RealTimeView: View {
     
     
     
+    
     @State private var selectedsender = "senders"
     @State private var selectedDataType = "None"
     @State private var filterIsOn = false
     
     
-    
-    var recivedMessage : [BLEData]{
+    var recivedMessage : [BLEData]! {
         get {
             if filterIsOn {
                 return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
@@ -49,6 +49,23 @@ struct RealTimeView: View {
     }
     
     
+    var chartData : [Double]!{
+        get {
+            if filterIsOn  {
+                return recivedMessage.map{Double($0.getValue())!}
+                
+            }else{
+                return []
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -57,83 +74,99 @@ struct RealTimeView: View {
         
         
         
+        
         VStack (spacing: 10) {
+            
+            
             
             Text("Real Time")
                 .font(.largeTitle .bold())
                 .frame( maxWidth: .infinity, alignment: .topLeading)
             
-            if bleManager.isConnected{
                 
-                
-                Toggle("Filter", isOn: $filterIsOn)
-                
-                
-                if filterIsOn {
-                    HStack {
-                        Text("Sender:")
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                        Picker("Please choose a sender", selection: $selectedsender) {
-                            ForEach(senders, id: \.self) {
-                                Text($0)
-                            }
-                        }.frame(alignment: .topLeading)
-                        
-                        
-                        
-                        
-                    }
+                if bleManager.isConnected{
                     
-                    HStack {
-                        Text("Data type:")
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                        Picker("Please choose a Data type", selection: $selectedDataType) {
-                            ForEach(dataTypes, id: \.self) {
-                                Text($0)
-                            }
-                        }.frame(alignment: .topLeading)
-                        
-                        //Text("You selected: \(selectedColor)")
-                    }
                     
-                }
-                
-                
-                
-                
-                
-                
-                
-                List(recivedMessage, id : \.self) { message in
-                    VStack{
-                        Text(message.sender)
-                            .font(.title3 .bold())
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
+                    Toggle("Filter", isOn: $filterIsOn)
+                    
+                    
+                    if filterIsOn {
                         HStack {
-                            Text(message.getKey())
-                            Spacer()
-                            Text(String(message.getValue()))
+                            Text("Sender:")
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                            Picker("Please choose a sender", selection: $selectedsender) {
+                                ForEach(senders, id: \.self) {
+                                    Text($0)
+                                }
+                            }.frame(alignment: .topLeading)
+                            
+                            
                             
                             
                         }
+                        
+                        HStack {
+                            Text("Data type:")
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                            Picker("Please choose a Data type", selection: $selectedDataType) {
+                                ForEach(dataTypes, id: \.self) {
+                                    Text($0)
+                                }
+                            }.frame(alignment: .topLeading)
+                            
+                            
+                        }
+                        
+                        
+                        VStack{
+                            
+                            
+                            BarChartView(data: chartData, colors: [Color.purple, Color.blue])
+                        }
+                        
                     }
-                }.frame(maxHeight: .infinity)
-                    .cornerRadius(20)
-                
-            }else{
-                Text("Device not connected")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .foregroundColor(Color.red)
-
-                
-            }
-                
-                
-            }.padding(10)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    List(recivedMessage, id : \.self) { message in
+                        VStack{
+                            Text(message.sender)
+                                .font(.title3 .bold())
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            HStack {
+                                Text(message.getKey())
+                                Spacer()
+                                Text(String(message.getValue()))
+                                
+                                
+                            }
+                            
+                            Text( message.getDataAsString())
+                                .font(.caption)
+                                .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                        }
+                    }.frame(maxHeight: .infinity)
+                        .cornerRadius(20)
+                    
+                    
+                }else{
+                    Text("Device not connected")
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .foregroundColor(Color.red)
+                    
+                    
+                }
             
-       
+            
+        }.padding(10)
+        
+        
         
         
     }
@@ -142,6 +175,13 @@ struct RealTimeView: View {
 
 struct MyDeviceView_Previews: PreviewProvider {
     static var previews: some View {
-        RealTimeView()
+        Group {
+            RealTimeView()
+                .previewInterfaceOrientation(.portrait)
+            RealTimeView()
+                .previewInterfaceOrientation(.portraitUpsideDown)
+            RealTimeView()
+                .previewInterfaceOrientation(.landscapeRight)
+        }
     }
 }
