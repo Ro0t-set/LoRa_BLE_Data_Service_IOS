@@ -11,7 +11,7 @@ import SwiftUI
 struct BLE_data_serviceApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

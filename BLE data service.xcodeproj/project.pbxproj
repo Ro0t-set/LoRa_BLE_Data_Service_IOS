@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		3839C6E6281833790064292D /* BLE_data_serviceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E5281833790064292D /* BLE_data_serviceApp.swift */; };
-		3839C6E8281833790064292D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E7281833790064292D /* ContentView.swift */; };
+		3839C6E8281833790064292D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E7281833790064292D /* DeviceView.swift */; };
 		3839C6EA2818337F0064292D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3839C6E92818337F0064292D /* Assets.xcassets */; };
 		3839C6ED2818337F0064292D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3839C6EC2818337F0064292D /* Preview Assets.xcassets */; };
 		3839C6F72818337F0064292D /* BLE_data_serviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6F62818337F0064292D /* BLE_data_serviceTests.swift */; };
 		3839C7012818337F0064292D /* BLE_data_serviceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7002818337F0064292D /* BLE_data_serviceUITests.swift */; };
 		3839C7032818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7022818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift */; };
+		3839C71028183CE40064292D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C70F28183CE40064292D /* MainView.swift */; };
+		3839C71228183D6F0064292D /* RealTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C71128183D6F0064292D /* RealTimeView.swift */; };
+		3839C71428183D8D0064292D /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C71328183D8D0064292D /* LogView.swift */; };
+		3839C7232819A7AC0064292D /* BLEManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7222819A7AC0064292D /* BLEManage.swift */; };
+		38427414281E9FAA002EFDF3 /* BLEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38427413281E9FAA002EFDF3 /* BLEData.swift */; };
+		38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FAB28208B2B00C1D4DE /* BLEDataFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,7 @@
 /* Begin PBXFileReference section */
 		3839C6E2281833790064292D /* BLE data service.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE data service.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3839C6E5281833790064292D /* BLE_data_serviceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceApp.swift; sourceTree = "<group>"; };
-		3839C6E7281833790064292D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3839C6E7281833790064292D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		3839C6E92818337F0064292D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3839C6EC2818337F0064292D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3839C6F22818337F0064292D /* BLE data serviceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BLE data serviceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +50,12 @@
 		3839C6FC2818337F0064292D /* BLE data serviceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BLE data serviceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3839C7002818337F0064292D /* BLE_data_serviceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceUITests.swift; sourceTree = "<group>"; };
 		3839C7022818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3839C70F28183CE40064292D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3839C71128183D6F0064292D /* RealTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeView.swift; sourceTree = "<group>"; };
+		3839C71328183D8D0064292D /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		3839C7222819A7AC0064292D /* BLEManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManage.swift; sourceTree = "<group>"; };
+		38427413281E9FAA002EFDF3 /* BLEData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEData.swift; sourceTree = "<group>"; };
+		38657FAB28208B2B00C1D4DE /* BLEDataFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +106,13 @@
 		3839C6E4281833790064292D /* BLE data service */ = {
 			isa = PBXGroup;
 			children = (
+				38427412281E9F67002EFDF3 /* Device */,
+				3839C7212819A78A0064292D /* BLE */,
+				3839C71328183D8D0064292D /* LogView.swift */,
+				3839C71128183D6F0064292D /* RealTimeView.swift */,
+				3839C70F28183CE40064292D /* MainView.swift */,
 				3839C6E5281833790064292D /* BLE_data_serviceApp.swift */,
-				3839C6E7281833790064292D /* ContentView.swift */,
+				3839C6E7281833790064292D /* DeviceView.swift */,
 				3839C6E92818337F0064292D /* Assets.xcassets */,
 				3839C6EB2818337F0064292D /* Preview Content */,
 			);
@@ -125,6 +142,23 @@
 				3839C7022818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift */,
 			);
 			path = "BLE data serviceUITests";
+			sourceTree = "<group>";
+		};
+		3839C7212819A78A0064292D /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				3839C7222819A7AC0064292D /* BLEManage.swift */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+		38427412281E9F67002EFDF3 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				38427413281E9FAA002EFDF3 /* BLEData.swift */,
+				38657FAB28208B2B00C1D4DE /* BLEDataFilter.swift */,
+			);
+			path = Device;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +291,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3839C6E8281833790064292D /* ContentView.swift in Sources */,
+				38427414281E9FAA002EFDF3 /* BLEData.swift in Sources */,
+				3839C7232819A7AC0064292D /* BLEManage.swift in Sources */,
+				3839C6E8281833790064292D /* DeviceView.swift in Sources */,
+				3839C71028183CE40064292D /* MainView.swift in Sources */,
+				3839C71228183D6F0064292D /* RealTimeView.swift in Sources */,
+				38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */,
+				3839C71428183D8D0064292D /* LogView.swift in Sources */,
 				3839C6E6281833790064292D /* BLE_data_serviceApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
