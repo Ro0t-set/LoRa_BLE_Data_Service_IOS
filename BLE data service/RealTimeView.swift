@@ -13,6 +13,8 @@ struct RealTimeView: View {
     @ObservedObject var bleManager = BLEManager.shared()
     
     
+    
+    
     var senders : [String] {
         get {
             return getAllSender(messageas: bleManager.listOfMessage)
@@ -29,7 +31,7 @@ struct RealTimeView: View {
     
     
     
-    @State private var selectedsender = "None"
+    @State private var selectedsender = "senders"
     @State private var selectedDataType = "None"
     @State private var filterIsOn = false
     
@@ -53,70 +55,85 @@ struct RealTimeView: View {
     var body: some View {
         
         
+        
+        
         VStack (spacing: 10) {
             
             Text("Real Time")
                 .font(.largeTitle .bold())
                 .frame( maxWidth: .infinity, alignment: .topLeading)
             
-            
-            Toggle("Filter", isOn: $filterIsOn)
-            
-            
-            if filterIsOn {
-                HStack {
-                    Text("Sender:")
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                    Picker("Please choose a sender", selection: $selectedsender) {
-                        ForEach(senders, id: \.self) {
-                            Text($0)
-                        }
-                    }.frame(alignment: .topLeading)
-                    
-                    
-                    
-                    
-                }
+            if bleManager.isConnected{
                 
-                HStack {
-                    Text("Data type:")
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                    Picker("Please choose a Data type", selection: $selectedDataType) {
-                        ForEach(dataTypes, id: \.self) {
-                            Text($0)
-                        }
-                    }.frame(alignment: .topLeading)
-                    
-                    //Text("You selected: \(selectedColor)")
-                } 
                 
-            }
-            
-            
-            
-            
-            
-            
-            
-            List(recivedMessage, id : \.self) { message in
-                VStack{
-                    Text(message.sender)
-                        .font(.title3 .bold())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                Toggle("Filter", isOn: $filterIsOn)
+                
+                
+                if filterIsOn {
                     HStack {
-                        Text(message.getKey())
-                        Spacer()
-                        Text(String(message.getValue()))
+                        Text("Sender:")
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                        Picker("Please choose a sender", selection: $selectedsender) {
+                            ForEach(senders, id: \.self) {
+                                Text($0)
+                            }
+                        }.frame(alignment: .topLeading)
+                        
+                        
                         
                         
                     }
+                    
+                    HStack {
+                        Text("Data type:")
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                        Picker("Please choose a Data type", selection: $selectedDataType) {
+                            ForEach(dataTypes, id: \.self) {
+                                Text($0)
+                            }
+                        }.frame(alignment: .topLeading)
+                        
+                        //Text("You selected: \(selectedColor)")
+                    }
+                    
                 }
-            }.frame(maxHeight: .infinity)
+                
+                
+                
+                
+                
+                
+                
+                List(recivedMessage, id : \.self) { message in
+                    VStack{
+                        Text(message.sender)
+                            .font(.title3 .bold())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        HStack {
+                            Text(message.getKey())
+                            Spacer()
+                            Text(String(message.getValue()))
+                            
+                            
+                        }
+                    }
+                }.frame(maxHeight: .infinity)
+                    .cornerRadius(20)
+                
+            }else{
+                Text("Device not connected")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .foregroundColor(Color.red)
+
+                
+            }
+                
+                
+            }.padding(10)
             
-            
-        }.padding(10)
-        
+       
         
         
     }

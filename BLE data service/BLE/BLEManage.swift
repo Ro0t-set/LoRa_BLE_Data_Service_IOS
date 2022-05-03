@@ -28,6 +28,9 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     @Published var descriptor : CBDescriptor!
     @Published var message = ""
     @Published var listOfMessage = [BLEData]()
+    
+    @Published var isScanning = false
+    
     var characteristic: CBCharacteristic!
     
     
@@ -81,13 +84,15 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     
     func startScanning() {
         print("startScanning")
+        self.peripherals.removeAll()
         self.myCentral.scanForPeripherals(withServices: [service], options: nil)
+        self.isScanning = true
         
     }
     
     func stopScanning() {
-        print("stopScanning")
         myCentral.stopScan()
+        self.isScanning = false
     }
     
     func connect(peripheral: CBPeripheral) {

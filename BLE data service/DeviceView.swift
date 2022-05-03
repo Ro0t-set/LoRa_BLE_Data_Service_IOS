@@ -14,7 +14,7 @@ struct DeviceView: View {
     
     @ObservedObject var bleManager = BLEManager.shared()
     @State private var sendGpsData = true
-    
+
     
     
     
@@ -58,10 +58,11 @@ struct DeviceView: View {
                         
                         bleManager.connect(peripheral: peripheral.CBP)
                         
-                    }.listRowBackground(self.bleManager.isConnected ? Color.green : Color(UIColor.systemGray))
+                    }.listRowBackground(self.bleManager.isConnected ? Color.green : nil)
                 
                 
             }.frame(height: 150)
+                .cornerRadius(20)
             
             
             HStack{
@@ -99,41 +100,45 @@ struct DeviceView: View {
             
             HStack {
                 VStack (spacing: 10) {
-                    Button(action: {
-                        self.bleManager.startScanning()
-                    }) {
-                        Text("Start Scanning")
+                    if (!bleManager.isConnected && !bleManager.isScanning){
+                        Button(action: {
+                            self.bleManager.startScanning()
+                            
+                        }) {
+                            
+                            Text("Start Scanning").padding(20).foregroundColor(Color.black).background(Color(UIColor.systemGreen)).cornerRadius(10)
+                        }
+                        
+                    }else if (bleManager.isScanning &&  !bleManager.isConnected){
+                        Button(action: {
+                            
+                            self.bleManager.stopScanning()
+                            
+                            
+                        }) {
+                            
+                            Text("Stop Scanning").padding(20).foregroundColor(Color.black).background(Color(UIColor.systemRed)).cornerRadius(10)
+                        }
                     }
                     
-                    Toggle("Send position", isOn: $sendGpsData)
-                                   
-
-                                if sendGpsData {
-                                    Text("Hello World!")
-                                }
-                }.padding()
-                
-                Spacer()
-                
-                VStack (spacing: 10) {
-                    Button(action: {
-                        //self.bleManager.peripheral_init()
-                        print("init")
-                    }) {
-                        Text("Init")
-                    }
-                    Button(action: {
-                        self.bleManager.whrite(messageString: "{'test' : '00'}")
+                    if bleManager.isConnected{
+                        Toggle("Send position", isOn: $sendGpsData)
                         
-                        print("invio mess")
                         
-                    }) {
-                        Text("Message test")
+                        if sendGpsData {
+                            Text("Hello World!")
+                        }
+                        
                     }
                 }.padding()
+                
+                
             }
             Spacer()
-            Text("\(self.bleManager.message)")
+            if bleManager.isConnected{
+                Text("Log: \(self.bleManager.message)")
+                
+            }
             
             
             

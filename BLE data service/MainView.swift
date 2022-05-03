@@ -11,11 +11,7 @@ import SwiftUI
 struct MainView: View {
     @ObservedObject var bleManager = BLEManager.shared()
     
-    init() {
-        self.bleManager.startScanning()
-        
-        
-    }
+
     
     var body: some View {
         TabView{
