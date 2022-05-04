@@ -11,7 +11,7 @@ import CoreBluetooth
 import CoreLocation
 import CoreLocationUI
 
-private let GPSTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+private let GPSTimer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
 
 struct DeviceView: View {
     
@@ -148,12 +148,12 @@ struct DeviceView: View {
                     if bleManager.isConnected{
                         Toggle("Send position", isOn: $sendGpsData)
                         if sendGpsData {
-                            HStack {
+                            VStack {
                                 Text("latitude: \(userLatitude)")
                                 Text("longitude: \(userLongitude)")
                                     .onReceive(GPSTimer) { _ in
                                         if sendGpsData{
-                                            self.bleManager.whrite(messageString: "{GPS:\(userLongitude), \(userLongitude)}")
+                                            self.bleManager.whrite(messageString: "{GPS:\(userLatitude), \(userLongitude)}")
                                             
                                         }
                                 }
