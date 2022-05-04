@@ -22,6 +22,9 @@ struct MainView: View {
             RealTimeView().tabItem{
                 Label("Real Time", systemImage: "arrow.triangle.2.circlepath.circle")
             }
+            MapView().tabItem{
+                Label("Map", systemImage: "map")
+            }
             LogView().tabItem{
                 Label("Log", systemImage: "doc")
             }

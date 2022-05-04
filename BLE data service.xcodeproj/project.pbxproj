@@ -22,6 +22,11 @@
 		38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FAB28208B2B00C1D4DE /* BLEDataFilter.swift */; };
 		38657FB72821773100C1D4DE /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FB62821773100C1D4DE /* BarView.swift */; };
 		38657FB92821775900C1D4DE /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FB82821775900C1D4DE /* BarChartView.swift */; };
+		38657FBC2822802C00C1D4DE /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FBB2822802C00C1D4DE /* LineView.swift */; };
+		38657FBE2822804800C1D4DE /* LineChartCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FBD2822804800C1D4DE /* LineChartCircleView.swift */; };
+		38657FC02822809800C1D4DE /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FBF2822809800C1D4DE /* LineChartView.swift */; };
+		38657FC42822A32400C1D4DE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FC32822A32400C1D4DE /* MapView.swift */; };
+		38657FC72822A47000C1D4DE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FC62822A47000C1D4DE /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,12 @@
 		38657FAB28208B2B00C1D4DE /* BLEDataFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataFilter.swift; sourceTree = "<group>"; };
 		38657FB62821773100C1D4DE /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		38657FB82821775900C1D4DE /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		38657FBB2822802C00C1D4DE /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		38657FBD2822804800C1D4DE /* LineChartCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartCircleView.swift; sourceTree = "<group>"; };
+		38657FBF2822809800C1D4DE /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		38657FC32822A32400C1D4DE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		38657FC62822A47000C1D4DE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BLE-data-service-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +121,9 @@
 		3839C6E4281833790064292D /* BLE data service */ = {
 			isa = PBXGroup;
 			children = (
-				38657FB82821775900C1D4DE /* BarChartView.swift */,
-				38657FB62821773100C1D4DE /* BarView.swift */,
-				38657FB3282176D800C1D4DE /* Chart */,
+				38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */,
+				38657FC52822A46300C1D4DE /* GPS */,
+				38657FBA28227FCD00C1D4DE /* Chart */,
 				38427412281E9F67002EFDF3 /* Device */,
 				3839C7212819A78A0064292D /* BLE */,
 				3839C71328183D8D0064292D /* LogView.swift */,
@@ -122,6 +133,7 @@
 				3839C6E7281833790064292D /* DeviceView.swift */,
 				3839C6E92818337F0064292D /* Assets.xcassets */,
 				3839C6EB2818337F0064292D /* Preview Content */,
+				38657FC32822A32400C1D4DE /* MapView.swift */,
 			);
 			path = "BLE data service";
 			sourceTree = "<group>";
@@ -168,11 +180,24 @@
 			path = Device;
 			sourceTree = "<group>";
 		};
-		38657FB3282176D800C1D4DE /* Chart */ = {
+		38657FBA28227FCD00C1D4DE /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				38657FB62821773100C1D4DE /* BarView.swift */,
+				38657FB82821775900C1D4DE /* BarChartView.swift */,
+				38657FBB2822802C00C1D4DE /* LineView.swift */,
+				38657FBD2822804800C1D4DE /* LineChartCircleView.swift */,
+				38657FBF2822809800C1D4DE /* LineChartView.swift */,
 			);
 			path = Chart;
+			sourceTree = "<group>";
+		};
+		38657FC52822A46300C1D4DE /* GPS */ = {
+			isa = PBXGroup;
+			children = (
+				38657FC62822A47000C1D4DE /* LocationManager.swift */,
+			);
+			path = GPS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,10 +332,15 @@
 			files = (
 				38657FB72821773100C1D4DE /* BarView.swift in Sources */,
 				38427414281E9FAA002EFDF3 /* BLEData.swift in Sources */,
+				38657FC72822A47000C1D4DE /* LocationManager.swift in Sources */,
 				3839C7232819A7AC0064292D /* BLEManage.swift in Sources */,
+				38657FC02822809800C1D4DE /* LineChartView.swift in Sources */,
 				3839C6E8281833790064292D /* DeviceView.swift in Sources */,
 				3839C71028183CE40064292D /* MainView.swift in Sources */,
+				38657FBC2822802C00C1D4DE /* LineView.swift in Sources */,
+				38657FC42822A32400C1D4DE /* MapView.swift in Sources */,
 				3839C71228183D6F0064292D /* RealTimeView.swift in Sources */,
+				38657FBE2822804800C1D4DE /* LineChartCircleView.swift in Sources */,
 				38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */,
 				38657FB92821775900C1D4DE /* BarChartView.swift in Sources */,
 				3839C71428183D8D0064292D /* LogView.swift in Sources */,
@@ -470,12 +500,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BLE data service/Preview Content\"";
 				DEVELOPMENT_TEAM = 4426B44M8P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BLE-data-service-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -499,12 +531,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BLE data service/Preview Content\"";
 				DEVELOPMENT_TEAM = 4426B44M8P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BLE-data-service-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

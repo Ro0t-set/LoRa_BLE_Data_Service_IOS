@@ -8,14 +8,38 @@
 import SwiftUI
 import CoreBluetooth
 
+import CoreLocation
+import CoreLocationUI
+
+private let GPSTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+
 struct DeviceView: View {
     
     
     
     @ObservedObject var bleManager = BLEManager.shared()
-    @State private var sendGpsData = true
-
+    @State private var sendGpsData = false
     
+    
+    
+    @StateObject var locationManager = LocationManager()
+    var timer = Timer()
+    
+    var userLatitude: String {
+        return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
+    }
+    
+    var userLongitude: String {
+        return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
+    }
+    
+
+    func sendGPSDataInBLE(){
+        if sendGpsData{
+            self.bleManager.whrite(messageString: "{GPS:\(userLongitude), \(userLongitude)}")
+            
+        }
+    }
     
     
     var body: some View {
@@ -123,33 +147,44 @@ struct DeviceView: View {
                     
                     if bleManager.isConnected{
                         Toggle("Send position", isOn: $sendGpsData)
-                        
-                        
                         if sendGpsData {
-                            Text("Hello World!")
+                            HStack {
+                                Text("latitude: \(userLatitude)")
+                                Text("longitude: \(userLongitude)")
+                                    .onReceive(GPSTimer) { _ in
+                                        if sendGpsData{
+                                            self.bleManager.whrite(messageString: "{GPS:\(userLongitude), \(userLongitude)}")
+                                            
+                                        }
+                                }
+                        
+                            }
+                            
                         }
                         
                     }
                 }.padding()
                 
                 
-            }
-            Spacer()
-            if bleManager.isConnected{
-                Text("Log: \(self.bleManager.message)")
                 
-            }
-            
-            
-            
-            
-        }.padding(10)
+                
+                
+                
+                
+            }.padding(10)
+        }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeviceView()
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            
+            DeviceView()
+            
+            
+            
+            
+        }
+        
         
     }
 }

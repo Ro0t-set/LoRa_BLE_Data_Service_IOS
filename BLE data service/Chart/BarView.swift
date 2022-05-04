@@ -22,8 +22,9 @@ struct BarView: View {
                 .fill(gradient)
                 .opacity(datum == 0.0 ? 0.0 : 1.0)
             
-            Text(descrition).rotationEffect(.degrees(-90))
+            Text(descrition).rotationEffect(.degrees(-90)).frame(width:100, height:100)
         }
         
     }
 }
+
