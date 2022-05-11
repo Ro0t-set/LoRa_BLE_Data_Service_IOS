@@ -61,7 +61,7 @@ struct DeviceView: View {
                     
                 }
                 else {
-                    Text("Bluetooth is NOT switched on")
+                    Text("Bluetooth is not switched on")
                         .foregroundColor(.red)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -69,6 +69,7 @@ struct DeviceView: View {
             }
             
             
+            VStack{
             
             
             List(bleManager.peripherals) { peripheral in
@@ -88,8 +89,18 @@ struct DeviceView: View {
             }.frame(height: 150)
                 .cornerRadius(20)
             
+            Text("select the device")
+                .font(.caption)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 15)
+                
+            }
+            
+            Spacer()
             
             HStack{
+
+                
                 Text("Device status: ")
                     .font(.headline)
                     .frame(alignment: .leading)
@@ -112,7 +123,7 @@ struct DeviceView: View {
                     }
                 }
                 else {
-                    Text("None")
+                    Text("disconnect")
                         .foregroundColor(.red)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -130,7 +141,7 @@ struct DeviceView: View {
                             
                         }) {
                             
-                            Text("Start Scanning").padding(20).foregroundColor(Color.black).background(Color(UIColor.systemGreen)).cornerRadius(10)
+                            Text("Start Scanning").padding(15).foregroundColor(Color.black).background(Color(UIColor.systemGreen)).cornerRadius(10).frame( maxHeight: .infinity)
                         }
                         
                     }else if (bleManager.isScanning &&  !bleManager.isConnected){
@@ -141,7 +152,7 @@ struct DeviceView: View {
                             
                         }) {
                             
-                            Text("Stop Scanning").padding(20).foregroundColor(Color.black).background(Color(UIColor.systemRed)).cornerRadius(10)
+                            Text("Stop Scanning").padding(15).foregroundColor(Color.black).background(Color(UIColor.systemRed)).cornerRadius(10).frame( maxHeight: .infinity)
                         }
                     }
                     
@@ -179,6 +190,7 @@ struct DeviceView: View {
         static var previews: some View {
             
             DeviceView()
+                .padding(.horizontal, 10)
             
             
             
