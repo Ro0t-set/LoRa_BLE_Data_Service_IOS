@@ -11,10 +11,13 @@ import SwiftUI
 struct MainView: View {
     @ObservedObject var bleManager = BLEManager.shared()
     
-
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.white
+    }
     
     var body: some View {
         TabView{
+            
             DeviceView()
                 .tabItem{
                     Label("Device", systemImage: "ferry")
@@ -22,7 +25,7 @@ struct MainView: View {
             RealTimeView().tabItem{
                 Label("Real Time", systemImage: "arrow.triangle.2.circlepath.circle")
             }
-            MapView().tabItem{
+            DeviceMapView().tabItem{
                 Label("Map", systemImage: "map")
             }
             LogView().tabItem{

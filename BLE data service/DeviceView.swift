@@ -18,7 +18,7 @@ struct DeviceView: View {
     
     
     @ObservedObject var bleManager = BLEManager.shared()
-    @State private var sendGpsData = false
+    @State private var sendGpsData = true
     
     
     
@@ -33,7 +33,7 @@ struct DeviceView: View {
         return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
     }
     
-
+    
     func sendGPSDataInBLE(){
         if sendGpsData{
             self.bleManager.whrite(messageString: "{GPS:\(userLongitude), \(userLongitude)}")
@@ -48,149 +48,152 @@ struct DeviceView: View {
             Text("Devices")
                 .font(.largeTitle .bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
-            HStack{
-                Text("BLE Status: ")
-                    .font(.headline)
-                    .frame(alignment: .leading)
+            
+            if !self.bleManager.isConnected {
                 
-                // Status goes here
-                if bleManager.isSwitchedOn {
-                    Text("Bluetooth is switched on")
-                        .foregroundColor(.green)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                VStack{
                     
-                }
-                else {
-                    Text("Bluetooth is not switched on")
-                        .foregroundColor(.red)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                
-            }
-            
-            
-            VStack{
-            
-            
-            List(bleManager.peripherals) { peripheral in
-                HStack {
-                    Text(peripheral.name)
-                    Spacer()
-                    Text(String(peripheral.rssi))
-                    
-                }.contentShape(Rectangle())
-                    .onTapGesture {
-                        
-                        bleManager.connect(peripheral: peripheral.CBP)
-                        
-                    }.listRowBackground(self.bleManager.isConnected ? Color.green : nil)
-                
-                
-            }.frame(height: 150)
-                .cornerRadius(20)
-            
-            Text("select the device")
-                .font(.caption)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 15)
-                
-            }
-            
-            Spacer()
-            
-            HStack{
-
-                
-                Text("Device status: ")
-                    .font(.headline)
-                    .frame(alignment: .leading)
-                
-                // Status goes here
-                if bleManager.isConnected {
-                    Text("Connected")
-                        .foregroundColor(.green)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Button(action: {
-                        self.bleManager.disconnect()
-                    }){
-                        Text("Disconnect")
-                            .padding(10)
-                            .background(Color.red)
-                            .foregroundColor(Color.black)
-                            .cornerRadius(5)
-                        
-                    }
-                }
-                else {
-                    Text("disconnect")
-                        .foregroundColor(.red)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                }
-                
-            }.frame( alignment: .leading)
-            
-            Spacer()
-            
-            HStack {
-                VStack (spacing: 10) {
-                    if (!bleManager.isConnected && !bleManager.isScanning){
-                        Button(action: {
-                            self.bleManager.startScanning()
+                    ForEach(bleManager.peripherals) { peripheral in
+                        HStack {
+                            Text(peripheral.name)
+                                .padding(.horizontal, 30)
+                                .font(.system(size: 45, weight: .bold, design: .default))
+                            Spacer()
+                            Text(String(peripheral.rssi))
+                                .padding(.horizontal, 30)
+                                .padding(.vertical, 50)
+                        }
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .onTapGesture {
+                            bleManager.connect(peripheral: peripheral.CBP)
                             
-                        }) {
-                            
-                            Text("Start Scanning").padding(15).foregroundColor(Color.black).background(Color(UIColor.systemGreen)).cornerRadius(10).frame( maxHeight: .infinity)
                         }
                         
-                    }else if (bleManager.isScanning &&  !bleManager.isConnected){
-                        Button(action: {
-                            
-                            self.bleManager.stopScanning()
-                            
-                            
-                        }) {
-                            
-                            Text("Stop Scanning").padding(15).foregroundColor(Color.black).background(Color(UIColor.systemRed)).cornerRadius(10).frame( maxHeight: .infinity)
-                        }
                     }
                     
-                    if bleManager.isConnected{
-                        Toggle("Send position", isOn: $sendGpsData)
-                        if sendGpsData {
-                            VStack {
-                                Text("latitude: \(userLatitude)")
-                                Text("longitude: \(userLongitude)")
-                                    .onReceive(GPSTimer) { _ in
-                                        if sendGpsData{
-                                            self.bleManager.whrite(messageString: "{GPS:\(userLatitude), \(userLongitude)}")
-                                            
-                                        }
+                }.frame(maxHeight: .infinity)
+            }else{
+                
+                VStack{
+                    HStack {
+                        Text(self.bleManager.device.name!)
+                            .padding(.horizontal, 30)
+                            .font(.system(size: 45, weight: .bold, design: .default))
+                        Spacer()
+                        Toggle("Send position", isOn: $sendGpsData).padding()
+                    }
+                    
+                    
+                    if sendGpsData {
+                        VStack {
+                            Text("")
+                                .onReceive(GPSTimer) { _ in
+                                    if sendGpsData{
+                                        self.bleManager.whrite(messageString: "{'GPS':\(userLatitude), \(userLongitude)}")
+                                    }
                                 }
-                        
-                            }
-                            
                         }
                         
                     }
-                }.padding()
-                
-                
-                
-                
-                
-                
-                
-            }.padding(10)
-        }
+                    
+                    Spacer()
+                    HStack {
+                        Text("Status")
+                        Spacer()
+                        Text("Connect")
+                    }.padding()
+                    Spacer()
+                    HStack {
+                        Text("Identifier")
+                        Spacer()
+                        Text("\(self.bleManager.device.identifier)")
+                    }.padding()
+                    
+       
+                    Spacer()
+    
+     
+                    
+  
+                    
+
+                    
+                    
+                    
+                }.frame(maxHeight:.infinity)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .onTapGesture {
+                        bleManager.connect(peripheral: self.bleManager.device)
+                    }
+            }
+            
+            Spacer()
+            
+            VStack (spacing: 10) {
+                if (!bleManager.isConnected && !bleManager.isScanning){
+                    Button(action: {
+                        self.bleManager.startScanning()
+                        
+                    }) {
+                        
+                        Text("Start Scanning")
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 15)
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .background(Color(UIColor.systemBlue))
+                            .cornerRadius(10)
+                        
+                        
+                    }
+                    
+                }else if (bleManager.isScanning &&  !bleManager.isConnected){
+                    Button(action: {
+                        
+                        self.bleManager.stopScanning()
+                        
+                        
+                    }) {
+                        
+                        Text("Stop Scanning")
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 15)
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .background(Color(UIColor.systemRed))
+                            .cornerRadius(10)
+                        
+                    }
+                }else if (bleManager.isConnected){
+                    Button(action: {
+                        
+                        self.bleManager.disconnect()
+                        
+                    }) {
+                        
+                        Text("Disconect")
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 15)
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .background(Color(UIColor.systemRed))
+                            .cornerRadius(10)
+                        
+                    }
+                }
+            }
+        }.padding(15)
+            .background(Color(UIColor.systemGroupedBackground))
     }
+    
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             
             DeviceView()
-                .padding(.horizontal, 10)
+            
             
             
             

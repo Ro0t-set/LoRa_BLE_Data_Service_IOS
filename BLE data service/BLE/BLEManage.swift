@@ -67,6 +67,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     
     
     
+    
+    
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         var peripheralName: String!
         
@@ -121,8 +123,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     
     func whrite(messageString: String){
         let data = messageString.data(using: .utf8)!
+
         if self.characteristic != nil{
             device.writeValue(data, for: self.characteristic, type: .withResponse)
+            
             
         }
     }
