@@ -208,6 +208,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         return  self.listOfMessage.filter { $0.getKey() == dataType }.filter { $0.getSender() == sender }
     }
     
+    func messagefilterByDataType (dataType : String) -> [BLEData]{
+        return  self.listOfMessage.filter { $0.getKey() == dataType }
+    }
+    
     
     
     

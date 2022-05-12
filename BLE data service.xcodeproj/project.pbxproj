@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38310389282D0ED000E66545 /* randomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38310388282D0ED000E66545 /* randomColor.swift */; };
 		3839C6E6281833790064292D /* BLE_data_serviceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E5281833790064292D /* BLE_data_serviceApp.swift */; };
 		3839C6E8281833790064292D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E7281833790064292D /* DeviceView.swift */; };
 		3839C6EA2818337F0064292D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3839C6E92818337F0064292D /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38310388282D0ED000E66545 /* randomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randomColor.swift; sourceTree = "<group>"; };
 		3839C6E2281833790064292D /* BLE data service.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE data service.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3839C6E5281833790064292D /* BLE_data_serviceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceApp.swift; sourceTree = "<group>"; };
 		3839C6E7281833790064292D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				38657FC62822A47000C1D4DE /* LocationManager.swift */,
 				385E6FB8282C0AB20011F52A /* MapView.swift */,
+				38310388282D0ED000E66545 /* randomColor.swift */,
 			);
 			path = GPS;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */,
 				38657FB92821775900C1D4DE /* BarChartView.swift in Sources */,
 				3839C71428183D8D0064292D /* LogView.swift in Sources */,
+				38310389282D0ED000E66545 /* randomColor.swift in Sources */,
 				3839C6E6281833790064292D /* BLE_data_serviceApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

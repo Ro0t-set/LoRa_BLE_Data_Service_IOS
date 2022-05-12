@@ -10,23 +10,61 @@ import MapKit
 
 
 struct DeviceMapView: View {
-
-    let places = [
-        Place(name: "British Museum", latitude: 51.519581, longitude: -0.127002),
-        Place(name: "Tower of London", latitude: 51.508052, longitude: -0.076035),
-        Place(name: "Big Ben", latitude: 51.500710, longitude: -0.124617)
-    ]
     
+    @StateObject var locationManager = LocationManager()
+    @ObservedObject var bleManager = BLEManager.shared()
+    var userLatitude: Double {
+        return locationManager.lastLocation?.coordinate.latitude ?? 0
+    }
+    
+    var userLongitude: Double {
+        return locationManager.lastLocation?.coordinate.longitude ?? 0
+    }
+    
+    var GPSData : [BLEData]{
+        get{
+            return bleManager.messagefilterByDataType(dataType: "GPS")
+        }
+        
+    }
+    
+    var tempPlace : [Place] = [ ]
+    
+    var places : [Place]{
+        get{
+            let datas = bleManager.messagefilterByDataType(dataType: "'GPS'")
 
-    @State var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 51.514134, longitude: -0.104236),
-        span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+            return [Place(name: "me now", latitude: userLatitude, longitude: userLongitude, date: Date())] + datas.map{
+                Place(
+                    name: $0.sender,
+                    latitude:  Double($0.getValue().components(separatedBy: ",")[0]) ?? 0,
+                    longitude :  Double($0.getValue().components(separatedBy: ",")[1]) ?? 0,
+                    date :  $0.currentDateTime
+                    
+                )
+            }
+        }
+        
+    }
+    
+    
+    var region : MKCoordinateRegion{
+        get{
+            return MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: userLatitude, longitude: userLongitude),
+                span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+            
+        }
+        
+    }
     
     
     var body: some View {
-        MapView(places: places, region: region)
+        MapView(places: places, region: region, info: places.last!)
         
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -36,7 +36,7 @@ struct DeviceView: View {
     
     func sendGPSDataInBLE(){
         if sendGpsData{
-            self.bleManager.whrite(messageString: "{GPS:\(userLongitude), \(userLongitude)}")
+            self.bleManager.whrite(messageString: "{GPS:\(userLongitude),\(userLongitude)}")
             
         }
     }
