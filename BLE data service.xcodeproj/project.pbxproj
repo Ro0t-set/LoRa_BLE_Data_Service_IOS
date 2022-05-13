@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		38310389282D0ED000E66545 /* randomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38310388282D0ED000E66545 /* randomColor.swift */; };
+		3831038F282E88B100E66545 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831038E282E88B100E66545 /* ActivityViewController.swift */; };
 		3839C6E6281833790064292D /* BLE_data_serviceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E5281833790064292D /* BLE_data_serviceApp.swift */; };
 		3839C6E8281833790064292D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C6E7281833790064292D /* DeviceView.swift */; };
 		3839C6EA2818337F0064292D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3839C6E92818337F0064292D /* Assets.xcassets */; };
@@ -50,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		38310388282D0ED000E66545 /* randomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randomColor.swift; sourceTree = "<group>"; };
+		3831038A282D71DA00E66545 /* BLE data service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BLE data service.entitlements"; sourceTree = "<group>"; };
+		3831038E282E88B100E66545 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3839C6E2281833790064292D /* BLE data service.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE data service.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3839C6E5281833790064292D /* BLE_data_serviceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceApp.swift; sourceTree = "<group>"; };
 		3839C6E7281833790064292D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
@@ -102,6 +105,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3831038B282DA2C000E66545 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				3831038E282E88B100E66545 /* ActivityViewController.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
 		3839C6D9281833790064292D = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +136,8 @@
 		3839C6E4281833790064292D /* BLE data service */ = {
 			isa = PBXGroup;
 			children = (
+				3831038B282DA2C000E66545 /* Log */,
+				3831038A282D71DA00E66545 /* BLE data service.entitlements */,
 				38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */,
 				38657FC52822A46300C1D4DE /* GPS */,
 				38657FBA28227FCD00C1D4DE /* Chart */,
@@ -349,6 +362,7 @@
 				3839C71228183D6F0064292D /* RealTimeView.swift in Sources */,
 				38657FBE2822804800C1D4DE /* LineChartCircleView.swift in Sources */,
 				38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */,
+				3831038F282E88B100E66545 /* ActivityViewController.swift in Sources */,
 				38657FB92821775900C1D4DE /* BarChartView.swift in Sources */,
 				3839C71428183D8D0064292D /* LogView.swift in Sources */,
 				38310389282D0ED000E66545 /* randomColor.swift in Sources */,
@@ -509,6 +523,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "BLE data service/BLE data service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BLE data service/Preview Content\"";
@@ -540,6 +555,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "BLE data service/BLE data service.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BLE data service/Preview Content\"";

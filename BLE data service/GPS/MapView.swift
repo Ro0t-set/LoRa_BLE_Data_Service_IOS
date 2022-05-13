@@ -20,7 +20,11 @@ struct Place: Identifiable {
     }
 }
 
+
+
 struct MapView: View {
+    
+    
     
     let places : [Place]
     
@@ -29,7 +33,9 @@ struct MapView: View {
     
     
     var body: some View {
-        VStack{
+        
+        
+        ZStack(alignment: .bottom){
             Map(coordinateRegion: $region, annotationItems: places) { place in
                 
                 MapAnnotation(coordinate: place.coordinate, anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
@@ -42,16 +48,26 @@ struct MapView: View {
                     
                 }
                 
-            }
+            }.ignoresSafeArea()
             
+            VStack{
             Text(info.name)
             Text(info.date.formatted())
+            }
+            .frame(maxWidth:.infinity, maxHeight:90)
+            .background(Color(UIColor.systemGroupedBackground))
+
+            
+            
+                
             
         }
         
         
         
     }
+    
+    
 }
 
 
