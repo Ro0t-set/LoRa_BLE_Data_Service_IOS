@@ -44,6 +44,8 @@ struct LineChartCircleView: View {
                         x: CGFloat(Double(xRelativeDelta[index]) * dilatation),
                         y: height * dataPoints[index] / highestPoint))
                     
+                 
+                    
                     path.addArc(center: CGPoint(
                         x: CGFloat(Double(xRelativeDelta[index]) * dilatation),
                         y: height * self.ratio(for: index)),
@@ -57,6 +59,6 @@ struct LineChartCircleView: View {
     }
     
     private func ratio(for index: Int) -> Double {
-        dataPoints[index] / highestPoint
+        1 - ( dataPoints[index] / highestPoint)
     }
 }

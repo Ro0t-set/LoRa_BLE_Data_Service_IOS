@@ -12,7 +12,7 @@ struct LineChartView: View {
     var date: [Date]
     var lineColor: Color = .red
     var outerCircleColor: Color = .red
-    var innerCircleColor: Color = .white
+    var innerCircleColor: Color = .red
     
     @State private var chartDimention = 1.0
     @State private var isEditing = false
@@ -26,10 +26,10 @@ struct LineChartView: View {
                     LineView(dataPoints: dataPoints, date: date, dilatation: chartDimention)
                         .accentColor(lineColor)
                     
-                    LineChartCircleView(dataPoints: dataPoints,radius: 3.0,date:date, dilatation: chartDimention)
+                   // LineChartCircleView(dataPoints: dataPoints,radius: 3.0,date:date, dilatation: chartDimention)
                         .accentColor(outerCircleColor)
                     
-                    LineChartCircleView(dataPoints: dataPoints, radius: 1.0, date: date, dilatation: chartDimention)
+                    //LineChartCircleView(dataPoints: dataPoints, radius: 2.0, date: date, dilatation: chartDimention)
                         .accentColor(innerCircleColor)
                 }
                 

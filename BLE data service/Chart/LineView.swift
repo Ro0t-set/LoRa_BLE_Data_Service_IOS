@@ -45,6 +45,6 @@ struct LineView: View {
     }
     
     private func ratio(for index: Int) -> Double {
-        dataPoints[index] / highestPoint
+        1 - ( dataPoints[index] / highestPoint)
     }
 }
