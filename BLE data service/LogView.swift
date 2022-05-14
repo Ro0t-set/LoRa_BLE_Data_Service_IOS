@@ -67,7 +67,8 @@ struct LogView: View {
             }.frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .background(Color.white)
                 .cornerRadius(20)
-                .padding()
+                .padding(.horizontal)
+                .padding(.bottom)
             
             
         }

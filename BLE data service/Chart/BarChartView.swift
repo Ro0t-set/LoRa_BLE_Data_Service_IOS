@@ -38,7 +38,7 @@ struct BarChartView: View {
                     }
                     
                 }
-            }
+            }.padding()
             Slider(
                 value: $chartDimention,
                 in: 4...25,

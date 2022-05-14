@@ -33,7 +33,7 @@ struct LineChartView: View {
                         .accentColor(innerCircleColor)
                 }
                 
-            }
+            }.padding()
             Slider(
                 value: $chartDimention,
                 in: 0.2...5,
