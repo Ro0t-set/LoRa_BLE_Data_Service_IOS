@@ -13,6 +13,7 @@ struct DeviceMapView: View {
     
     @StateObject var locationManager = LocationManager()
     @ObservedObject var bleManager = BLEManager.shared()
+    
     var userLatitude: Double {
         return locationManager.lastLocation?.coordinate.latitude ?? 0
     }
@@ -29,7 +30,9 @@ struct DeviceMapView: View {
     }
     
     func aroundOfBleData(date : Date, name : String) -> [BLEData]{
-        return bleManager.listOfMessage.filter{$0.currentDateTime.timeIntervalSince1970 + 10 > date.timeIntervalSince1970 && $0.getSender() == name}
+        return bleManager.listOfMessage
+            .filter{$0.currentDateTime.addingTimeInterval(10) > date}
+            .filter{ $0.getSender() == name}
     }
     
     var tempPlace : [Place] = [ ]

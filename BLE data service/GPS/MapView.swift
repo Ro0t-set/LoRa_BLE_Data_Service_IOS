@@ -21,7 +21,7 @@ struct Place: Identifiable {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-
+    
 }
 
 
@@ -35,7 +35,7 @@ struct MapView: View {
     @State var region : MKCoordinateRegion
     @State var info : Place
     @State private var position = CardPosition.middle
-
+    @State private var background = BackgroundStyle.blur
     
     var body: some View {
         
@@ -48,12 +48,12 @@ struct MapView: View {
                     Circle()
                         .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:10)
                         .frame(width: 20, height: 20)
-                        .shadow(radius: 5)
+                        .shadow(radius: 3)
                         .onTapGesture {
                             self.info = place
-                                
+                            
                         }
-                        
+                    
                     
                 }
                 
@@ -61,52 +61,59 @@ struct MapView: View {
                 
             }.ignoresSafeArea()
             
-         
-            SlideOverCard($position) {
-                            VStack {
-                                Text("Info").font(.title)
+            
+            SlideOverCard($position, backgroundStyle: $background ) {
+                VStack {
+                    Text("Info").font(.title)
+                    
+                    VStack{
+                        Text("Name: \(self.info.name)")
+                            .frame( maxWidth: .infinity, alignment: .topLeading)
+                            .padding()
+                        Text("Deta: \(self.info.date)")
+                            .frame( maxWidth: .infinity, alignment: .topLeading)
+                            .padding()
+                        
+                    }.background(Color.white)
+                        .cornerRadius(20)
+                        .shadow(radius: 3)
+                        .padding()
+                    
+                    ScrollView{
+                        ForEach(self.info.aroundOfBleData ?? [ ] , id: \.self) { singolDataArround in
+                            VStack{
+                                Text(singolDataArround.sender)
+                                    .font(.title3 .bold())
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                Text("Name: \(self.info.name)")
-                                Text("Deta: \(self.info.date)")
-                                
-                                ForEach(self.info.aroundOfBleData ?? [ ] , id: \.self) { singolDataArround in
-                                    VStack{
-                                        Text(singolDataArround.sender)
-                                            .font(.title3 .bold())
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                        
-                                        HStack {
-                                            Text(singolDataArround.getKey())
-                                            Spacer()
-                                            Text(String(singolDataArround.getValue()))
-                                            
-                                        }
-                                        
-                                        Text( singolDataArround.getDataAsString())
-                                            .font(.caption)
-                                            .frame(maxWidth: .infinity, alignment: .bottomTrailing)
-                                        
-                                    }.padding()
-                                        .background(Color.white)
-                                
+                                HStack {
+                                    Text(singolDataArround.getKey())
+                                    Spacer()
+                                    Text(String(singolDataArround.getValue()))
+                                    
                                 }
                                 
-       
-                            }.background(Color(UIColor.systemGroupedBackground))
+                                Text( singolDataArround.getDataAsString())
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                                
+                            }.padding()
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .shadow(radius: 5)
+                            
+                            
+                        }.padding()
+                            .padding(.bottom, 70)
+                        
+                    }
+                    
+                    
+                }
                 
             }
-                
-           
-                
-           
-            
-            
-            
-            
             
         }
-        
-        
         
     }
     
