@@ -15,9 +15,13 @@ struct Place: Identifiable {
     let latitude: Double
     let longitude: Double
     let date: Date
+    let aroundOfBleData: [BLEData]?
+    
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
+    
+
 }
 
 
@@ -60,9 +64,35 @@ struct MapView: View {
          
             SlideOverCard($position) {
                             VStack {
-                                Text("Slide Over Card").font(.title)
-                                Spacer()
-                            }
+                                Text("Info").font(.title)
+                                
+                                Text("Name: \(self.info.name)")
+                                Text("Deta: \(self.info.date)")
+                                
+                                ForEach(self.info.aroundOfBleData ?? [ ] , id: \.self) { singolDataArround in
+                                    VStack{
+                                        Text(singolDataArround.sender)
+                                            .font(.title3 .bold())
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        
+                                        HStack {
+                                            Text(singolDataArround.getKey())
+                                            Spacer()
+                                            Text(String(singolDataArround.getValue()))
+                                            
+                                        }
+                                        
+                                        Text( singolDataArround.getDataAsString())
+                                            .font(.caption)
+                                            .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                                        
+                                    }.padding()
+                                        .background(Color.white)
+                                
+                                }
+                                
+       
+                            }.background(Color(UIColor.systemGroupedBackground))
                 
             }
                 

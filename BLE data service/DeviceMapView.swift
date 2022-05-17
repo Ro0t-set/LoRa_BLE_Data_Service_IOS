@@ -28,19 +28,24 @@ struct DeviceMapView: View {
         
     }
     
+    func aroundOfBleData(date : Date, name : String) -> [BLEData]{
+        return bleManager.listOfMessage.filter{$0.currentDateTime.timeIntervalSince1970 + 10 > date.timeIntervalSince1970 && $0.getSender() == name}
+    }
+    
     var tempPlace : [Place] = [ ]
     
     var places : [Place]{
         get{
             let datas = bleManager.messagefilterByDataType(dataType: "'GPS'")
             
-            return [Place(name: "me", latitude: userLatitude, longitude: userLongitude, date: Date())] + datas.map{
+            return [Place(name: "me", latitude: userLatitude, longitude: userLongitude, date: Date(), aroundOfBleData: nil)] +
+            datas.map{
                 Place(
                     name: $0.sender,
                     latitude:  Double($0.getValue().components(separatedBy: ",")[0]) ?? 0,
                     longitude :  Double($0.getValue().components(separatedBy: ",")[1]) ?? 0,
-                    date :  $0.currentDateTime
-                    
+                    date :  $0.currentDateTime,
+                    aroundOfBleData : self.aroundOfBleData( date: $0.currentDateTime, name: $0.sender)
                 )
             }
         }
