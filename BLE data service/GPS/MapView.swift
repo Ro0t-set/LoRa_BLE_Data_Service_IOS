@@ -7,7 +7,7 @@
 
 import SwiftUI
 import MapKit
-
+import SlideOverCard
 
 struct Place: Identifiable {
     let id = UUID()
@@ -30,8 +30,8 @@ struct MapView: View {
     
     @State var region : MKCoordinateRegion
     @State var info : Place
-    
-    
+    @State private var position = CardPosition.middle
+
     
     var body: some View {
         
@@ -46,7 +46,6 @@ struct MapView: View {
                         .frame(width: 20, height: 20)
                         .shadow(radius: 5)
                         .onTapGesture {
-ß
                             self.info = place
                                 
                         }
@@ -58,14 +57,18 @@ struct MapView: View {
                 
             }.ignoresSafeArea()
             
-            VStack{
-                Text(info.name)
-                Text(info.date.formatted())
-                
+         
+            SlideOverCard($position) {
+                            VStack {
+                                Text("Slide Over Card").font(.title)
+                                Spacer()
+                            }
                 
             }
-            .frame(maxWidth:.infinity, maxHeight:90)
-            .background(Color(UIColor.systemGroupedBackground))
+                
+           
+                
+           
             
             
             

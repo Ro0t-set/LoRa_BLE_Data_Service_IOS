@@ -21,6 +21,7 @@
 		3839C71428183D8D0064292D /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C71328183D8D0064292D /* LogView.swift */; };
 		3839C7232819A7AC0064292D /* BLEManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7222819A7AC0064292D /* BLEManage.swift */; };
 		38427414281E9FAA002EFDF3 /* BLEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38427413281E9FAA002EFDF3 /* BLEData.swift */; };
+		3844B8322833F52A0036903B /* SlideOverCard in Frameworks */ = {isa = PBXBuildFile; productRef = 3844B8312833F52A0036903B /* SlideOverCard */; };
 		385E6FB9282C0AB20011F52A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385E6FB8282C0AB20011F52A /* MapView.swift */; };
 		38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FAB28208B2B00C1D4DE /* BLEDataFilter.swift */; };
 		38657FB72821773100C1D4DE /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FB62821773100C1D4DE /* BarView.swift */; };
@@ -85,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3844B8322833F52A0036903B /* SlideOverCard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +237,9 @@
 			dependencies = (
 			);
 			name = "BLE data service";
+			packageProductDependencies = (
+				3844B8312833F52A0036903B /* SlideOverCard */,
+			);
 			productName = "BLE data service";
 			productReference = 3839C6E2281833790064292D /* BLE data service.app */;
 			productType = "com.apple.product-type.application";
@@ -307,6 +312,9 @@
 				Base,
 			);
 			mainGroup = 3839C6D9281833790064292D;
+			packageReferences = (
+				3844B8302833F52A0036903B /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
+			);
 			productRefGroup = 3839C6E3281833790064292D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -697,6 +705,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3844B8302833F52A0036903B /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moifort/swiftUI-slide-over-card.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3844B8312833F52A0036903B /* SlideOverCard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3844B8302833F52A0036903B /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */;
+			productName = SlideOverCard;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3839C6DA281833790064292D /* Project object */;
 }
