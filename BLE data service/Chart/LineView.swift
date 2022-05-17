@@ -26,22 +26,31 @@ struct LineView: View {
     
     
     var body: some View {
+        
         GeometryReader { geometry in
-            let height = geometry.size.height
-            
-            
-            Path { path in
-                path.move(to: CGPoint(x: 0, y: height * self.ratio(for: 0)))
+            ScrollView(.horizontal) {
                 
-                for index in 1..<dataPoints.count {
-                    path.addLine(to: CGPoint(
-                        x: CGFloat(Double(xRelativeDelta[index]) * dilatation),
-                        y: height * self.ratio(for: index)))
-                }
+                let height = geometry.size.height
+                HStack{
+                    
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: height * self.ratio(for: 0)))
+                        
+                        for index in 1..<dataPoints.count {
+                            path.addLine(to: CGPoint(
+                                x: CGFloat(Double(xRelativeDelta[index]) * dilatation),
+                                y: height * self.ratio(for: index)))
+                        }
+                    }
+                    .stroke(Color.accentColor, style: StrokeStyle(lineWidth: 2, lineJoin: .round))
+                    
+                }.frame(width: Double(xRelativeDelta[dataPoints.count-1]) * dilatation)
+                
             }
-            .stroke(Color.accentColor, style: StrokeStyle(lineWidth: 2, lineJoin: .round))
         }
-        .padding(.vertical)
+        .padding()
+        
+        
     }
     
     private func ratio(for index: Int) -> Double {

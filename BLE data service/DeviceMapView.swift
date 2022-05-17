@@ -33,8 +33,8 @@ struct DeviceMapView: View {
     var places : [Place]{
         get{
             let datas = bleManager.messagefilterByDataType(dataType: "'GPS'")
-
-            return [Place(name: "me now", latitude: userLatitude, longitude: userLongitude, date: Date())] + datas.map{
+            
+            return [Place(name: "me", latitude: userLatitude, longitude: userLongitude, date: Date())] + datas.map{
                 Place(
                     name: $0.sender,
                     latitude:  Double($0.getValue().components(separatedBy: ",")[0]) ?? 0,
@@ -46,12 +46,13 @@ struct DeviceMapView: View {
         }
         
     }
-    
+    let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
     
     var region : MKCoordinateRegion{
         get{
             return MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: userLatitude, longitude: userLongitude),
+                
+                center: CLLocationCoordinate2D(latitude: places.last?.latitude ?? 0, longitude: places.last?.longitude ?? 0),
                 span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
             
         }
@@ -60,7 +61,12 @@ struct DeviceMapView: View {
     
     
     var body: some View {
-        MapView(places: places, region: region, info: places.last!)
+        if(places.count > 0){
+            MapView(places: places, region: region, info: places.last!)
+            
+        }else{
+            Text("No data")
+        }
         
     }
     

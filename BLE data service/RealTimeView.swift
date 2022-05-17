@@ -86,10 +86,11 @@ struct RealTimeView: View {
                 ScrollView {
                     VStack{
                         Toggle("Filter", isOn: $filterIsOn)
-                            .padding()
                         
                         
-                    }.padding()
+                        
+                    }          .padding(.horizontal)
+                        .padding(.vertical,10)
                         .background(Color.white)
                         .cornerRadius(20)
                     
@@ -129,29 +130,45 @@ struct RealTimeView: View {
                         
                     }
                     
-                    List(recivedMessage, id : \.self) { message in
-                        VStack{
-                            Text(message.sender)
-                                .font(.title3 .bold())
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                    ZStack{
+                        
+                        List(recivedMessage, id : \.self) { message in
                             
-                            HStack {
-                                Text(message.getKey())
-                                Spacer()
-                                Text(String(message.getValue()))
+                            VStack{
+                                
+                                
+                                Text(message.sender)
+                                    .font(.title3 .bold())
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                HStack {
+                                    Text(message.getKey())
+                                    Spacer()
+                                    Text(String(message.getValue()))
+                                    
+                                }
+                                
+                                Text( message.getDataAsString())
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity, alignment: .bottomTrailing)
                                 
                             }
                             
-                            Text( message.getDataAsString())
-                                .font(.caption)
-                                .frame(maxWidth: .infinity, alignment: .bottomTrailing)
-                        }
+                            
+                            
+                        }.frame(height:350)
+                         
+            
+                        
                     }
-                    .frame(maxHeight:.infinity)
-                    .frame(minHeight: 400)
+                    .padding()
+                    .frame(height:350)
+                    .background(Color.white)
                     .cornerRadius(20)
                     
-                    .background(Color(UIColor.systemGroupedBackground))
+                    
+                    
+                    
                     
                     
                     VStack{

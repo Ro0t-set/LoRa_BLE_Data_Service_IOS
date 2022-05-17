@@ -20,8 +20,9 @@ struct LineChartView: View {
     
     var body: some View {
         VStack {
-            ScrollView(.horizontal) {
+            
                 ZStack {
+                   
                     
                     LineView(dataPoints: dataPoints, date: date, dilatation: chartDimention)
                         .accentColor(lineColor)
@@ -31,9 +32,9 @@ struct LineChartView: View {
                     
                     //LineChartCircleView(dataPoints: dataPoints, radius: 2.0, date: date, dilatation: chartDimention)
                         .accentColor(innerCircleColor)
-                }
+                }.padding(20)
                 
-            }.padding()
+           
             Slider(
                 value: $chartDimention,
                 in: 0.2...5,

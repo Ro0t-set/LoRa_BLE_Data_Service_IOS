@@ -32,6 +32,7 @@ struct MapView: View {
     @State var info : Place
     
     
+    
     var body: some View {
         
         
@@ -39,27 +40,36 @@ struct MapView: View {
             Map(coordinateRegion: $region, annotationItems: places) { place in
                 
                 MapAnnotation(coordinate: place.coordinate, anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
+                    
                     Circle()
                         .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:10)
                         .frame(width: 20, height: 20)
+                        .shadow(radius: 5)
                         .onTapGesture {
+                            .frame(width: 30, height: 30)
                             self.info = place
+                                
                         }
+                        
                     
                 }
+                
+                
                 
             }.ignoresSafeArea()
             
             VStack{
-            Text(info.name)
-            Text(info.date.formatted())
+                Text(info.name)
+                Text(info.date.formatted())
+                
+                
             }
             .frame(maxWidth:.infinity, maxHeight:90)
             .background(Color(UIColor.systemGroupedBackground))
-
             
             
-                
+            
+            
             
         }
         
