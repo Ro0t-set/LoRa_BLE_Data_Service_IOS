@@ -46,7 +46,7 @@ struct MapView: View {
                         .frame(width: 20, height: 20)
                         .shadow(radius: 5)
                         .onTapGesture {
-                            .frame(width: 30, height: 30)
+ß
                             self.info = place
                                 
                         }
