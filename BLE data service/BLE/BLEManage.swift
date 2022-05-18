@@ -212,6 +212,24 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         return  self.listOfMessage.filter { $0.getKey() == dataType }
     }
     
+    func dataLoading(data : String){
+        let col : [String] = data.components(separatedBy: .newlines)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss E, d MMM y"
+        
+        
+        self.listOfMessage = self.listOfMessage + col.map{
+            BLEData(sender: $0.components(separatedBy: CharacterSet(["\t"]))[0],
+                    key: $0.components(separatedBy: CharacterSet(["\t"]))[1],
+                    value:  $0.components(separatedBy: CharacterSet(["\t"]))[2],
+                    date: formatter.date(from: $0.components(separatedBy:CharacterSet(["\t"]))[3] ) ?? Date())
+        }
+        
+
+   
+    }
+    
+    
     
     
     

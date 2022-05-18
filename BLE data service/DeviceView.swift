@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreBluetooth
-
+import FilePicker
 import CoreLocation
 import CoreLocationUI
 
@@ -49,6 +49,30 @@ struct DeviceView: View {
                 .font(.largeTitle .bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
             
+   
+
+                FilePicker(types: [.plainText], allowMultiple: false) { urls in
+                    
+             
+                    do {
+                        let text = try String(contentsOf:  urls[0].absoluteURL, encoding: .utf8)
+                        print(text)
+                        self.bleManager.dataLoading(data: text)
+                        
+                        }
+                        catch {/* error handling here */}
+
+                  } label: {
+                      HStack {
+                          Image(systemName: "doc.on.doc")
+                          Text("Pick Files")
+                      }
+                  
+                
+        
+                
+            }
+            
             if !self.bleManager.isConnected {
                 
                 VStack{
@@ -64,15 +88,13 @@ struct DeviceView: View {
                                 .padding(.vertical, 50)
                         }
                         .background(Color.white)
-                        .cornerRadius(15)
+                        .cornerRadius(20)
+                        .shadow(radius: 3)
                         .onTapGesture {
                             bleManager.connect(peripheral: peripheral.CBP)
-                            
                         }
-                        
                     }
-                    
-                }.frame(maxHeight: .infinity)
+                }.frame(maxHeight: .infinity, alignment: .top)
             }else{
                 
                 VStack{
@@ -123,7 +145,8 @@ struct DeviceView: View {
                     
                 }.frame(maxHeight:.infinity)
                     .background(Color.white)
-                    .cornerRadius(15)
+                    .cornerRadius(20)
+                    .shadow(radius: 3)
                     .onTapGesture {
                         bleManager.connect(peripheral: self.bleManager.device)
                     }

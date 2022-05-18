@@ -81,7 +81,7 @@ struct RealTimeView: View {
                 .padding()
             
             
-            if bleManager.isConnected{
+            if bleManager.listOfMessage.count > 0{
                 
                 ScrollView {
                     VStack{
@@ -129,14 +129,11 @@ struct RealTimeView: View {
                         .cornerRadius(20)
                         
                     }
+                    Divider().background(Color.black)
                     
-                    ZStack{
-                        
-                        List(recivedMessage, id : \.self) { message in
-                            
+                    ScrollView{
+                        ForEach(self.recivedMessage , id: \.self) { message in
                             VStack{
-                                
-                                
                                 Text(message.sender)
                                     .font(.title3 .bold())
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -152,21 +149,18 @@ struct RealTimeView: View {
                                     .font(.caption)
                                     .frame(maxWidth: .infinity, alignment: .bottomTrailing)
                                 
-                            }
+                            }.padding()
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .shadow(radius: 5)
                             
                             
-                            
-                        }.frame(height:350)
-                         
-            
+                        }.padding()
+                            .padding(.bottom, 70)
                         
-                    }
-                    .padding()
-                    .frame(height:350)
-                    .background(Color.white)
-                    .cornerRadius(20)
+                    }.frame(height: 350)
                     
-                    
+                    Divider().background(Color.black)
                     
                     
                     
@@ -199,6 +193,7 @@ struct RealTimeView: View {
                     .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .foregroundColor(Color.red)
                     .padding(.horizontal)
+                Text("Connect a device or import data").padding()
                 
             }
             

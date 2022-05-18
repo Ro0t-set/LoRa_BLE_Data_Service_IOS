@@ -11,7 +11,13 @@ class BLEData: NSObject, ObservableObject{
     
     var message : [String]
     var sender : String
-    let currentDateTime = Date()
+    var currentDateTime = Date()
+    
+    init(sender: String, key: String, value: String, date: Date) {
+        self.message = [key, value]
+        self.sender = sender
+        self.currentDateTime = date
+    }
     
 
     

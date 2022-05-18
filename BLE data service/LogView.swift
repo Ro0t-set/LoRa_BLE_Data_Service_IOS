@@ -33,7 +33,7 @@ struct LogView: View {
     
     var logs : String {
         get{
-            return   self.bleManager.listOfMessage.map{"\($0.getKey())\t\($0.getValue())\t\($0.getDataAsString())" }.joined(separator: "\n")
+            return   self.bleManager.listOfMessage.map{"\($0.getSender())\t\($0.getKey())\t\($0.getValue())\t\($0.getDataAsString())" }.joined(separator: "\n")
         }
     }
     
