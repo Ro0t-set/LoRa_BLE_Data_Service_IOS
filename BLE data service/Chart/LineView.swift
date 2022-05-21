@@ -43,6 +43,7 @@ struct LineView: View {
                         }
                     }
                     .stroke(Color.accentColor, style: StrokeStyle(lineWidth: 2, lineJoin: .round))
+                    .padding(.vertical)
                     
                 }.frame(width: Double(xRelativeDelta[dataPoints.count-1]) * dilatation)
                 
