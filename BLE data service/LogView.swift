@@ -132,7 +132,7 @@ struct LogView: View {
                     .shadow(radius: 3)
                 
                 Group {
-                    Image(systemName: "folder.circle.fill")
+                    Image(systemName: "arrow.down.doc.fill")
                         .font(.system(size: 100))
                         .foregroundColor(Color.green)
                         .shadow(radius: 3)

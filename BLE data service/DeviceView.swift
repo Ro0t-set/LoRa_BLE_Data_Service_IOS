@@ -49,29 +49,9 @@ struct DeviceView: View {
                 .font(.largeTitle .bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-   
-
-                FilePicker(types: [.plainText], allowMultiple: false) { urls in
-                    
-             
-                    do {
-                        let text = try String(contentsOf:  urls[0].absoluteURL, encoding: .utf8)
-                        print(text)
-                        self.bleManager.dataLoading(data: text)
-                        
-                        }
-                        catch {/* error handling here */}
-
-                  } label: {
-                      HStack {
-                          Image(systemName: "doc.on.doc")
-                          Text("Pick Files")
-                      }
-                  
-                
-        
-                
-            }
+            
+            
+            
             
             if !self.bleManager.isConnected {
                 
@@ -132,14 +112,14 @@ struct DeviceView: View {
                         Text("\(self.bleManager.device.identifier)")
                     }.padding()
                     
-       
+                    
                     Spacer()
-    
-     
                     
-  
                     
-
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -156,19 +136,51 @@ struct DeviceView: View {
             
             VStack (spacing: 10) {
                 if (!bleManager.isConnected && !bleManager.isScanning){
-                    Button(action: {
-                        self.bleManager.startScanning()
-                        
-                    }) {
-                        
-                        Text("Start Scanning")
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 15)
-                            .font(.system(size: 24, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
-                            .background(Color(UIColor.systemBlue))
-                            .cornerRadius(10)
-                        
+                    GeometryReader { metrics in
+                        HStack{
+                            Button(action: {
+                                self.bleManager.startScanning()
+                                
+                            }) {
+                                
+                                Text("Start Scanning")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 15)
+                                    .font(.system(size: 24, weight: .bold, design: .default))
+                                    .foregroundColor(Color.white)
+                                    .background(Color(UIColor.systemBlue))
+                                    .cornerRadius(10)
+                                    .frame(maxHeight: .infinity, alignment: .bottom)
+                                
+                                
+                            }
+                            
+                            FilePicker(types: [.plainText], allowMultiple: false) { urls in
+                                
+                                
+                                do {
+                                    let text = try String(contentsOf:  urls[0].absoluteURL, encoding: .utf8)
+                                    print(text)
+                                    self.bleManager.dataLoading(data: text)
+                                    
+                                }
+                                catch {/* error handling here */}
+                                
+                            } label: {
+                                
+                                
+                                Text("Load Log")
+                                    .frame(maxWidth: metrics.size.height * 0.53)
+                                    .padding(.vertical, 15)
+                                    .font(.system(size: 24, weight: .bold, design: .default))
+                                    .foregroundColor(Color.white)
+                                    .background(Color(UIColor.systemPurple))
+                                    .cornerRadius(10)
+                                    .frame(maxHeight: .infinity, alignment: .bottom)
+                                
+                            }
+                            
+                        }
                         
                     }
                     
