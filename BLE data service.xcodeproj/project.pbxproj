@@ -32,6 +32,7 @@
 		38657FC42822A32400C1D4DE /* DeviceMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FC32822A32400C1D4DE /* DeviceMapView.swift */; };
 		38657FC72822A47000C1D4DE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FC62822A47000C1D4DE /* LocationManager.swift */; };
 		386F8DD0283567160015F66C /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 386F8DCF283567160015F66C /* FilePicker */; };
+		3890CBC3283A6A4000597133 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3890CBC2283A6A4000597133 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		38657FC32822A32400C1D4DE /* DeviceMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMapView.swift; sourceTree = "<group>"; };
 		38657FC62822A47000C1D4DE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BLE-data-service-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3890CBC2283A6A4000597133 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				3831038B282DA2C000E66545 /* Log */,
 				3831038A282D71DA00E66545 /* BLE data service.entitlements */,
 				38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */,
+				3890CBC2283A6A4000597133 /* Launch Screen.storyboard */,
 				38657FC52822A46300C1D4DE /* GPS */,
 				38657FBA28227FCD00C1D4DE /* Chart */,
 				38427412281E9F67002EFDF3 /* Device */,
@@ -335,6 +338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3890CBC3283A6A4000597133 /* Launch Screen.storyboard in Resources */,
 				3839C6ED2818337F0064292D /* Preview Assets.xcassets in Resources */,
 				3839C6EA2818337F0064292D /* Assets.xcassets in Resources */,
 			);
@@ -543,11 +547,15 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BLE-data-service-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -575,11 +583,15 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BLE-data-service-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
