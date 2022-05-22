@@ -123,7 +123,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     
     func whrite(messageString: String){
         let data = messageString.data(using: .utf8)!
-
+        
         if self.characteristic != nil{
             device.writeValue(data, for: self.characteristic, type: .withResponse)
             
@@ -212,21 +212,26 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         return  self.listOfMessage.filter { $0.getKey() == dataType }
     }
     
-    func dataLoading(data : String){
+    func dataLoading(data : String)  {
         let col : [String] = data.components(separatedBy: .newlines)
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss E, d MMM y"
+        var fileParser: [BLEData] =  [ ]
         
-        
-        self.listOfMessage = self.listOfMessage + col.map{
+        fileParser = col.filter{
+            $0.components(separatedBy: CharacterSet(["\t"])).count == 4
+        }.map{
             BLEData(sender: $0.components(separatedBy: CharacterSet(["\t"]))[0],
                     key: $0.components(separatedBy: CharacterSet(["\t"]))[1],
                     value:  $0.components(separatedBy: CharacterSet(["\t"]))[2],
                     date: formatter.date(from: $0.components(separatedBy:CharacterSet(["\t"]))[3] ) ?? Date())
+            
         }
+        self.listOfMessage =  self.listOfMessage + fileParser
         
-
-   
+        
+        
+        
     }
     
     

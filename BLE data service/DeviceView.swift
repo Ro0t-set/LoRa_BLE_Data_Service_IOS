@@ -19,7 +19,7 @@ struct DeviceView: View {
     
     @ObservedObject var bleManager = BLEManager.shared()
     @State private var sendGpsData = true
-    
+    @State private var loadedFile = false
     
     
     @StateObject var locationManager = LocationManager()
@@ -49,6 +49,13 @@ struct DeviceView: View {
                 .font(.largeTitle .bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
             
+            if self.loadedFile  {
+                Text("File uploaded successfully")
+                    .font(.caption .bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color.green)
+                
+            }
             
             
             
@@ -160,8 +167,10 @@ struct DeviceView: View {
                                 
                                 do {
                                     let text = try String(contentsOf:  urls[0].absoluteURL, encoding: .utf8)
-                                    print(text)
                                     self.bleManager.dataLoading(data: text)
+                                    if(self.bleManager.listOfMessage.count > 0){
+                                        self.loadedFile = true
+                                    }
                                     
                                 }
                                 catch {/* error handling here */}
@@ -169,7 +178,7 @@ struct DeviceView: View {
                             } label: {
                                 
                                 
-                                Text("Load Log")
+                                Text("Log File")
                                     .frame(maxWidth: metrics.size.height * 0.53)
                                     .padding(.vertical, 15)
                                     .font(.system(size: 24, weight: .bold, design: .default))
