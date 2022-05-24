@@ -14,20 +14,20 @@ struct RealTimeView: View {
     
     var senders : [String] {
         get {
-            return getAllSender(messageas: bleManager.listOfMessage)
+            return ["None"] + getAllSender(messageas: bleManager.listOfMessage)
         }
         
     }
     
     var dataTypes : [String] {
         get {
-            return getAllDataType(messageas: bleManager.listOfMessage)
+            return ["None"] + getAllDataType(messageas: bleManager.listOfMessage)
         }
         
     }
     
-    @State private var selectedsender = ""
-    @State private var selectedDataType = ""
+    @State private var selectedsender = "None"
+    @State private var selectedDataType = "None"
     @State private var filterIsOn = false
     
     

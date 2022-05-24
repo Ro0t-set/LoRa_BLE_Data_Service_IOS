@@ -24,6 +24,11 @@ struct Place: Identifiable {
     
 }
 
+extension Place: Equatable {
+    static func < (lhs: Place, rhs: Place) -> Bool {
+        return lhs.longitude == rhs.longitude && lhs.longitude == rhs.longitude && lhs.date == rhs.date
+    }
+}
 
 
 struct MapView: View {
@@ -31,6 +36,7 @@ struct MapView: View {
     
     
     let places : [Place]
+    
     
     @State var region : MKCoordinateRegion
     @State var info : Place
@@ -42,22 +48,25 @@ struct MapView: View {
         
         ZStack(alignment: .bottom){
             Map(coordinateRegion: $region, annotationItems: places) { place in
-                
                 MapAnnotation(coordinate: place.coordinate, anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
-                    
-                    Circle()
-                        .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:10)
-                        .frame(width: 20, height: 20)
-                        .shadow(radius: 3)
-                        .onTapGesture {
-                            self.info = place
-                            
+                    ZStack{
+                        Circle()
+                            .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:5)
+                            .frame(width: 20, height: 20)
+                            .shadow(radius: 3)
+                            .onTapGesture {
+                                self.info = place
+                                
+                            }
+                        
+                        if  self.info == place{
+                            Circle()
+                                .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:10)
+                                .frame(width: 20, height: 20)
                         }
-                    
+                    }
                     
                 }
-                
-                
                 
             }.ignoresSafeArea()
             
@@ -81,6 +90,7 @@ struct MapView: View {
                     
                     ScrollView{
                         ForEach(self.info.aroundOfBleData ?? [ ] , id: \.self) { singolDataArround in
+                            
                             VStack{
                                 Text(singolDataArround.sender)
                                     .font(.title3 .bold())

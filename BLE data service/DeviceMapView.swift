@@ -31,7 +31,7 @@ struct DeviceMapView: View {
     
     func aroundOfBleData(date : Date, name : String) -> [BLEData]{
         return bleManager.listOfMessage
-            .filter{$0.currentDateTime.addingTimeInterval(10) > date}
+            .filter{$0.currentDateTime.addingTimeInterval(10) >= date}
             .filter{ $0.getSender() == name}
     }
     
