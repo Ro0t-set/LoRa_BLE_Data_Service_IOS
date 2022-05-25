@@ -30,9 +30,17 @@ struct DeviceMapView: View {
     }
     
     func aroundOfBleData(date : Date, name : String) -> [BLEData]{
+        
+        
+
         return bleManager.listOfMessage
-            .filter{$0.currentDateTime.addingTimeInterval(10) >= date}
+            .filter{
+                Int($0.currentDateTime.timeIntervalSince1970) < Int(date.timeIntervalSince1970)
+                &&
+                Int($0.currentDateTime.addingTimeInterval(15).timeIntervalSince1970) > Int(date.timeIntervalSince1970)
+            }
             .filter{ $0.getSender() == name}
+            
     }
     
     var tempPlace : [Place] = [ ]
@@ -41,50 +49,51 @@ struct DeviceMapView: View {
         get{
             let datas = bleManager.messagefilterByDataType(dataType: "'GPS'")
             
-            return [Place(name: "me", latitude: userLatitude, longitude: userLongitude, date: Date(), aroundOfBleData: nil)] +
-            datas.map{
-                Place(
-                    name: $0.sender,
-                    latitude:  Double($0.getValue().components(separatedBy: ",")[0]) ?? 0,
-                    longitude :  Double($0.getValue().components(separatedBy: ",")[1]) ?? 0,
-                    date :  $0.currentDateTime,
-                    aroundOfBleData : self.aroundOfBleData( date: $0.currentDateTime, name: $0.sender)
-                )
-            }
-        }
-        
-    }
-    let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
-    
-    var region : MKCoordinateRegion{
-        get{
-            return MKCoordinateRegion(
                 
-                center: CLLocationCoordinate2D(latitude: places.last?.latitude ?? 0, longitude: places.last?.longitude ?? 0),
-                span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
-            
-        }
-        
-    }
-    
-    
-    var body: some View {
-        if(places.count > 0){
-            MapView(places: places, region: region, info: places.last!)
-            
-        }else{
-            Text("No data")
-        }
-        
-    }
-    
-    
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeviceMapView()
-    }
-}
-
-
+                return [Place(name: "me", latitude: userLatitude, longitude: userLongitude, date: Date(), aroundOfBleData: nil)] +
+                datas.map{
+                    Place(
+                        name: $0.sender,
+                        latitude:  Double($0.getValue().components(separatedBy: ",")[0]) ?? 0,
+                        longitude :  Double($0.getValue().components(separatedBy: ",")[1]) ?? 0,
+                        date :  $0.currentDateTime,
+                        aroundOfBleData : self.aroundOfBleData( date: $0.currentDateTime, name: $0.sender)
+                    )
+                }
+            }
+                  
+                  }
+                  let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
+                  
+                  var region : MKCoordinateRegion{
+                get{
+                    return MKCoordinateRegion(
+                        
+                        center: CLLocationCoordinate2D(latitude: places.last?.latitude ?? 0, longitude: places.last?.longitude ?? 0),
+                        span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+                    
+                }
+                
+            }
+                  
+                  
+                  var body: some View {
+                if(places.count > 0){
+                    MapView(places: places, region: region, info: places.last!)
+                    
+                }else{
+                    Text("No data")
+                }
+                
+            }
+                  
+                  
+                  }
+                  
+                  struct ContentView_Previews: PreviewProvider {
+                static var previews: some View {
+                    DeviceMapView()
+                }
+            }
+                  
+                  
