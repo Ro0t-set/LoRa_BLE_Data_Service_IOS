@@ -53,7 +53,7 @@ struct MapView: View {
                         Circle()
                             .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:5)
                             .frame(width: 20, height: 20)
-                            .shadow(radius: 3)
+                            .shadow(radius: 1)
                             .onTapGesture {
                                 self.info = place
                                 
@@ -61,8 +61,9 @@ struct MapView: View {
                         
                         if  self.info == place{
                             Circle()
-                                .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:10)
-                                .frame(width: 20, height: 20)
+                                .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:15)
+                                .frame(width: 25, height: 25)
+                                .shadow(radius: 5)
                         }
                     }
                     
@@ -110,7 +111,7 @@ struct MapView: View {
                             }.padding()
                                 .background(Color.white)
                                 .cornerRadius(20)
-                                .shadow(radius: 5)
+                                .shadow(radius: 3)
                             
                             
                         }.padding()
