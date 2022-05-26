@@ -29,6 +29,8 @@ struct RealTimeView: View {
     @State private var selectedsender = "None"
     @State private var selectedDataType = "None"
     @State private var filterIsOn = false
+    @State private var rangeFilterStart = Date.now
+    @State private var rangeFilterStop = Date.now
     
     
     var recivedMessage : [BLEData]! {
@@ -106,12 +108,9 @@ struct RealTimeView: View {
                                         Text($0)
                                     }
                                 }.frame(alignment: .topLeading)
-                                
-                                
-                                
-                                
-                            }.padding()
+                            }.padding(.horizontal)
                             
+                            Divider()
                             
                             HStack {
                                 Text("Data type:")
@@ -119,14 +118,28 @@ struct RealTimeView: View {
                                 Picker("Please choose a Data type", selection: $selectedDataType) {
                                     ForEach(dataTypes, id: \.self) {
                                         Text($0)
-                                    }.padding()
-                                }.frame(alignment: .topLeading).padding(5)
+                                    }
+                                }.frame(alignment: .topLeading)
                                 
-                            }.padding()
+                            }.padding(.horizontal)
+                            
+                            Divider()
+                            
+                            HStack {
+                                Text("Date range:")
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                VStack{
+                                    DatePicker("", selection: $rangeFilterStart)
+                                    DatePicker("", selection:  $rangeFilterStop)
+                                }
+                                
+                            }.padding(.horizontal)
                             
                         }
                         .background(Color.white)
                         .cornerRadius(20)
+                       
+                        
                         
                     }
                     Divider().background(Color.black)
