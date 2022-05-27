@@ -87,7 +87,7 @@ struct RealTimeView: View {
                 .padding()
             
             
-            if bleManager.listOfMessage.count == 0{
+            if bleManager.listOfMessage.count > 0{
                 
                 ScrollView {
                     VStack{
