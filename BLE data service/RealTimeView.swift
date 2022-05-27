@@ -26,9 +26,13 @@ struct RealTimeView: View {
         
     }
     
+    
+
+    
     @State private var selectedsender = "None"
     @State private var selectedDataType = "None"
     @State private var filterIsOn = false
+    @State private var dateFilterIsOn = false
     @State private var rangeFilterStart = Date.now
     @State private var rangeFilterStop = Date.now
     
@@ -83,11 +87,11 @@ struct RealTimeView: View {
                 .padding()
             
             
-            if bleManager.listOfMessage.count > 0{
+            if bleManager.listOfMessage.count == 0{
                 
                 ScrollView {
                     VStack{
-                        Toggle("Filter", isOn: $filterIsOn)
+                        Toggle("Apply filters to data", isOn: $filterIsOn)
                         
                         
                         
@@ -126,11 +130,16 @@ struct RealTimeView: View {
                             Divider()
                             
                             HStack {
-                                Text("Date range:")
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
                                 VStack{
-                                    DatePicker("", selection: $rangeFilterStart)
-                                    DatePicker("", selection:  $rangeFilterStop)
+                                    Text("Date range")
+                                    Toggle("", isOn: $dateFilterIsOn).padding()
+                                    
+                                }
+                                
+                                VStack{
+                                    DatePicker("", selection: $rangeFilterStart).disabled(!dateFilterIsOn)
+                                    DatePicker("", selection:  $rangeFilterStop).disabled(!dateFilterIsOn)
+                                        .padding(.bottom)
                                 }
                                 
                             }.padding(.horizontal)
