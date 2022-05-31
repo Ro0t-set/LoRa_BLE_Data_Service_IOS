@@ -20,9 +20,9 @@ struct DeviceView: View {
     @ObservedObject var bleManager = BLEManager.shared()
     @State private var sendGpsData = true
     @State private var loadedFile = false
-    
-    
     @StateObject var locationManager = LocationManager()
+    @State private var fileUrl : String = ""
+    
     var timer = Timer()
     
     var userLatitude: String {
@@ -52,10 +52,45 @@ struct DeviceView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             if self.loadedFile  {
+                VStack{
+                    
                 Text("File uploaded successfully")
-                    .font(.caption .bold())
+                    .font(.title3 .bold())
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color.green)
+                    .padding()
+                    
+  
+                    
+                    Text("""
+                         Date from
+                         \(self.bleManager.listOfMessage.first!.getDataAsString())
+                         to \(self.bleManager.listOfMessage.last!.getDataAsString())
+                         """)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .padding()
+                    
+                Button(action: {
+                    self.bleManager.listOfMessage = [ ]
+                    self.loadedFile = false
+                    }) {
+                        Text("Unallocate file")
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .background(Color(UIColor.systemRed))
+                            .cornerRadius(10)
+
+                    }.padding()
+                
+                    
+                }
+                .ignoresSafeArea()
+                .frame(height:.infinity, alignment: .top)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(radius: 3)
                 
             }
             
@@ -151,7 +186,6 @@ struct DeviceView: View {
                                 self.bleManager.startScanning()
                                 
                             }) {
-                                
                                 Text("Start Scanning")
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 15)
@@ -160,8 +194,7 @@ struct DeviceView: View {
                                     .background(Color(UIColor.systemBlue))
                                     .cornerRadius(10)
                                     .frame(maxHeight: .infinity, alignment: .bottom)
-                                
-                                
+                                    .opacity(loadedFile ? 0.5 : 1)
                             }
                             
                             FilePicker(types: [.plainText], allowMultiple: false) { urls in
@@ -169,6 +202,7 @@ struct DeviceView: View {
                                 
                                 do {
                                     let text = try String(contentsOf:  urls[0].absoluteURL, encoding: .utf8)
+                                    self.fileUrl = try String(contentsOf: urls[0])
                                     self.bleManager.dataLoading(data: text)
                                     if(self.bleManager.listOfMessage.count > 0){
                                         self.loadedFile = true
@@ -181,19 +215,20 @@ struct DeviceView: View {
                                 
                                 
                                 Text("Log File")
-                                    .frame(maxWidth: metrics.size.height * 0.53)
+                                    .frame(maxWidth: metrics.size.height * 0.55)
                                     .padding(.vertical, 15)
                                     .font(.system(size: 24, weight: .bold, design: .default))
                                     .foregroundColor(Color.white)
                                     .background(Color(UIColor.systemPurple))
                                     .cornerRadius(10)
                                     .frame(maxHeight: .infinity, alignment: .bottom)
+                                    .opacity(loadedFile ? 0.5 : 1)
                                 
                             }
                             
                         }
                         
-                    }
+                    }.disabled(loadedFile)
                     
                 }else if (bleManager.isScanning &&  !bleManager.isConnected){
                     Button(action: {
@@ -230,8 +265,9 @@ struct DeviceView: View {
                     }
                 }
             }
-        }.padding(15)
-            .background(Color(UIColor.systemGroupedBackground))
+        }
+        .padding(15)
+        .background(Color(UIColor.systemGroupedBackground))
     }
     
     
