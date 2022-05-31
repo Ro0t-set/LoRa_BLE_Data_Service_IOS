@@ -86,8 +86,6 @@ struct DeviceView: View {
                 
                     
                 }
-                .ignoresSafeArea()
-                .frame(height:.infinity, alignment: .top)
                 .background(Color.white)
                 .cornerRadius(20)
                 .shadow(radius: 3)
@@ -187,7 +185,7 @@ struct DeviceView: View {
                                 
                             }) {
                                 Text("Start Scanning")
-                                    .frame(maxWidth: .infinity)
+                                    .frame(maxWidth: metrics.size.width * 0.55)
                                     .padding(.vertical, 15)
                                     .font(.system(size: 24, weight: .bold, design: .default))
                                     .foregroundColor(Color.white)
@@ -215,7 +213,7 @@ struct DeviceView: View {
                                 
                                 
                                 Text("Log File")
-                                    .frame(maxWidth: metrics.size.height * 0.55)
+                                    .frame(maxWidth: metrics.size.width * 0.45)
                                     .padding(.vertical, 15)
                                     .font(.system(size: 24, weight: .bold, design: .default))
                                     .foregroundColor(Color.white)
@@ -228,7 +226,9 @@ struct DeviceView: View {
                             
                         }
                         
-                    }.disabled(loadedFile)
+                    }
+                    .disabled(loadedFile)
+                    .frame(maxHeight : 120)
                     
                 }else if (bleManager.isScanning &&  !bleManager.isConnected){
                     Button(action: {
