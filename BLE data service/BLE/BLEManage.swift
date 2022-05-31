@@ -214,6 +214,19 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         return  self.listOfMessage.filter { $0.getKey() == dataType }
     }
     
+    
+    func aroundOfBleData(startDate : Date, endDate : Date) -> [BLEData]{
+        
+        return listOfMessage
+            .filter{
+                Int($0.currentDateTime.timeIntervalSince1970) < Int(startDate.timeIntervalSince1970)
+                &&
+                Int($0.currentDateTime.timeIntervalSince1970) > Int(endDate.timeIntervalSince1970)
+            }
+            
+        
+    }
+    
     func dataLoading(data : String)  {
         let col : [String] = data.components(separatedBy: .newlines)
         let formatter = DateFormatter()
@@ -230,11 +243,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
             
         }
         self.listOfMessage =  self.listOfMessage + fileParser
-        
-        
-        
-        
+ 
     }
+    
+    
+    
     
     
     

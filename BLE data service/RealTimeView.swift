@@ -122,6 +122,14 @@ struct RealTimeView: View {
     var recivedMessage : [BLEData]! {
         get {
             if filterIsOn {
+                if dateFilterIsOn{
+                    return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
+                        .filter{
+                        Int($0.currentDateTime.timeIntervalSince1970) < Int(rangeFilterStop.timeIntervalSince1970)
+                        &&
+                        Int($0.currentDateTime.timeIntervalSince1970) > Int(rangeFilterStart.timeIntervalSince1970)
+                        }
+                }
                 return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
                 
             }else{
