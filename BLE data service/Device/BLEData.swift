@@ -60,6 +60,12 @@ class BLEData: NSObject, ObservableObject{
         return formatter.string(from: self.currentDateTime)
     }
     
+    func getDataHoureAsString() -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self.currentDateTime)
+    }
+    
 }
 
 

@@ -33,6 +33,7 @@
 		38657FC72822A47000C1D4DE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FC62822A47000C1D4DE /* LocationManager.swift */; };
 		386F8DD0283567160015F66C /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 386F8DCF283567160015F66C /* FilePicker */; };
 		3890CBC3283A6A4000597133 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3890CBC2283A6A4000597133 /* Launch Screen.storyboard */; };
+		38F32B4E2845227F00818C4A /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 38F32B4D2845227F00818C4A /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F32B4E2845227F00818C4A /* SwiftUICharts in Frameworks */,
 				386F8DD0283567160015F66C /* FilePicker in Frameworks */,
 				3844B8322833F52A0036903B /* SlideOverCard in Frameworks */,
 			);
@@ -245,6 +247,7 @@
 			packageProductDependencies = (
 				3844B8312833F52A0036903B /* SlideOverCard */,
 				386F8DCF283567160015F66C /* FilePicker */,
+				38F32B4D2845227F00818C4A /* SwiftUICharts */,
 			);
 			productName = "BLE data service";
 			productReference = 3839C6E2281833790064292D /* BLE data service.app */;
@@ -321,6 +324,7 @@
 			packageReferences = (
 				3844B8302833F52A0036903B /* XCRemoteSwiftPackageReference "swiftUI-slide-over-card" */,
 				386F8DCE283567160015F66C /* XCRemoteSwiftPackageReference "FilePicker" */,
+				38F32B4C2845227E00818C4A /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 3839C6E3281833790064292D /* Products */;
 			projectDirPath = "";
@@ -739,6 +743,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		38F32B4C2845227E00818C4A /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,6 +763,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 386F8DCE283567160015F66C /* XCRemoteSwiftPackageReference "FilePicker" */;
 			productName = FilePicker;
+		};
+		38F32B4D2845227F00818C4A /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38F32B4C2845227E00818C4A /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

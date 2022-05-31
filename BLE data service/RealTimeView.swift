@@ -6,11 +6,20 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct RealTimeView: View {
     
     
     @ObservedObject var bleManager = BLEManager.shared()
+    
+    
+    @State private var selectedsender = "None"
+    @State private var selectedDataType = "None"
+    @State private var filterIsOn = false
+    @State private var dateFilterIsOn = false
+    @State private var rangeFilterStart = Date.now
+    @State private var rangeFilterStop = Date.now
     
     var senders : [String] {
         get {
@@ -26,15 +35,88 @@ struct RealTimeView: View {
         
     }
     
+    var chartData : [LineChartDataPoint]? {
+        get {
+            return  recivedMessage.filter{
+                if Double($0.getValue()) != nil{
+                    return true
+                    
+                }else{
+                    return false
+                    
+                }
+                
+            }.map{LineChartDataPoint( value: Double($0.getValue()) ?? 0, xAxisLabel: $0.getDataHoureAsString(), description: $0.getDataAsString())}
+            
+        }
+    }
     
-
     
-    @State private var selectedsender = "None"
-    @State private var selectedDataType = "None"
-    @State private var filterIsOn = false
-    @State private var dateFilterIsOn = false
-    @State private var rangeFilterStart = Date.now
-    @State private var rangeFilterStop = Date.now
+    
+    var chartBarData : [Double]? {
+        get {
+            return  recivedMessage.filter{
+                if Double($0.getValue()) != nil{
+                    return true
+                    
+                }else{
+                    return false
+                    
+                }
+                
+            }.map{Double($0.getValue()) ?? 0}
+            
+        }
+    }
+    
+    
+    var data : LineChartData {
+        get{
+            let data = LineDataSet(dataPoints: chartData!,
+                                   legendTitle: selectedDataType,
+                                   pointStyle: PointStyle(),
+                                   style: LineStyle(lineColour: ColourStyle(colour: .red), lineType: .curvedLine))
+            
+            let metadata   = ChartMetadata(title: "Line chart", subtitle: "linear distribution of points")
+            
+            let gridStyle  = GridStyle(numberOfLines: 10,
+                                       lineColour   : Color(.lightGray).opacity(0.5),
+                                       lineWidth    : 1,
+                                       dash         : [8],
+                                       dashPhase    : 0)
+            
+            let chartStyle = LineChartStyle(infoBoxPlacement    : .infoBox(isStatic: false),
+                                            infoBoxBorderColour : Color.primary,
+                                            infoBoxBorderStyle  : StrokeStyle(lineWidth: 1),
+                                            
+                                            markerType          : .vertical(attachment: .line(dot: .style(DotStyle()))),
+                                            
+                                            xAxisGridStyle      : gridStyle,
+                                            xAxisLabelPosition  : .bottom,
+                                            xAxisLabelColour    : Color.primary,
+                                            xAxisLabelsFrom     : .dataPoint(rotation: .degrees(90)),
+                                            
+                                            yAxisGridStyle      : gridStyle,
+                                            yAxisLabelPosition  : .leading,
+                                            yAxisLabelColour    : Color.primary,
+                                            yAxisNumberOfLabels : 10,
+                                            
+                                            baseline            : .minimumWithMaximum(of: 0),
+                                            topLine             : .maximum(of: data.maxValue()),
+                                            
+                                            globalAnimation     : .easeOut(duration: 1))
+            
+            return LineChartData(dataSets       : data,
+                                 metadata       : metadata,
+                                 chartStyle     : chartStyle)
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     
     var recivedMessage : [BLEData]! {
@@ -48,21 +130,7 @@ struct RealTimeView: View {
         }
     }
     
-    var chartData : [Double]? {
-        get {
-            return  recivedMessage.filter{
-                if Double($0.getValue()) != nil{
-                    return true
-                    
-                }else{
-                    return false
-                    
-                }
-                
-            }.map{Double($0.getValue())!}
-            
-        }
-    }
+    
     
     var chartDate : [Date] {
         get {
@@ -92,18 +160,11 @@ struct RealTimeView: View {
                 ScrollView {
                     VStack{
                         Toggle("Apply filters to data", isOn: $filterIsOn)
+                            .padding()
                         
                         
-                        
-                    }          .padding(.horizontal)
-                        .padding(.vertical,10)
-                        .background(Color.white)
-                        .cornerRadius(20)
-                    
-                    
-                    
-                    if filterIsOn {
-                        VStack{
+                        if filterIsOn {
+                            Divider()
                             HStack {
                                 Text("Sender:")
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -144,14 +205,15 @@ struct RealTimeView: View {
                                 
                             }.padding(.horizontal)
                             
+                            
+                            
+                            
                         }
-                        .background(Color.white)
-                        .cornerRadius(20)
-                       
-                        
                         
                     }
-                    Divider().background(Color.black)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    
                     
                     ScrollView{
                         ForEach(self.recivedMessage , id: \.self) { message in
@@ -172,7 +234,7 @@ struct RealTimeView: View {
                                     .frame(maxWidth: .infinity, alignment: .bottomTrailing)
                                 
                             }.padding()
-                                .background(Color.white)
+                                .background(Color(UIColor.systemBackground))
                                 .cornerRadius(20)
                                 .shadow(radius: 5)
                             
@@ -180,33 +242,50 @@ struct RealTimeView: View {
                         }.padding()
                             .padding(.bottom, 70)
                         
-                    }.frame(height: 350)
+                    }
+                    .frame(height: 350)
+                    .background(Color.white)
+                    .cornerRadius(20)
                     
-                    Divider().background(Color.black)
+                    
                     
                     
                     
                     
                     VStack{
                         if (chartData?.count)! > 0 && filterIsOn{
-                            BarChartView(data: chartData!, colors: [Color.purple, Color.blue])                             .frame(height: 300)
                             
+                            
+                            BarChartView(data: chartBarData!, colors: [Color.purple, Color.blue])
+                                .frame(height: 300)
                                 .background(Color.white.cornerRadius(20))
-                                .padding()
                             
                             Spacer()
                             
-                            LineChartView(dataPoints: chartData!, date: chartDate)
-                                .frame(height: 300)
-                            
-                                .background(Color.white.cornerRadius(20))
+                            VStack{
+                            LineChart(chartData: data)
+                                .pointMarkers(chartData: data)
+                                .touchOverlay(chartData: data, specifier: "%s")
+                                .floatingInfoBox(chartData: data)
+                                .xAxisGrid(chartData: data)
+                                .yAxisGrid(chartData: data)
+                                .xAxisLabels(chartData: data)
+                                .yAxisLabels(chartData: data)
+                                .infoBox(chartData: data)
+                                .headerBox(chartData: data)
+                                .legends(chartData: data)
+                                .id(data.id)
+                                .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 350, maxHeight: 400, alignment: .center)
                                 .padding()
+                                
+                            }.background(Color.white.cornerRadius(20))
+                                
                             
                         }
                     }.frame(maxHeight: 700)
                     
                     
-                }.padding()
+                }.padding(.horizontal)
                 
                 
             }else{
