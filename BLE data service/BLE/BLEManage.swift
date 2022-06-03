@@ -149,6 +149,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         }
     }
     
+    
+    
+    
+    
+    
     func peripheral(_ peripheral: CBPeripheral,
                     didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         // If an error occurred, disconnect so we can try again from the start
@@ -174,6 +179,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         }
     }
     
+    
+    func discoverServices(peripheral: CBPeripheral) {
+        peripheral.discoverServices(nil)
+    }
     
     
     

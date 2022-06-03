@@ -125,9 +125,9 @@ struct RealTimeView: View {
                 if dateFilterIsOn{
                     return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
                         .filter{
-                        Int($0.currentDateTime.timeIntervalSince1970) < Int(rangeFilterStop.timeIntervalSince1970)
-                        &&
-                        Int($0.currentDateTime.timeIntervalSince1970) > Int(rangeFilterStart.timeIntervalSince1970)
+                            Int($0.currentDateTime.timeIntervalSince1970) < Int(rangeFilterStop.timeIntervalSince1970)
+                            &&
+                            Int($0.currentDateTime.timeIntervalSince1970) > Int(rangeFilterStart.timeIntervalSince1970)
                         }
                 }
                 return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
@@ -163,7 +163,7 @@ struct RealTimeView: View {
                 .padding()
             
             
-            if bleManager.listOfMessage.count > 0 {
+            if bleManager.listOfMessage.count > 0{
                 
                 ScrollView {
                     VStack{
@@ -206,8 +206,8 @@ struct RealTimeView: View {
                                 }
                                 
                                 VStack{
-                                    DatePicker("", selection: $rangeFilterStart).disabled(!dateFilterIsOn)
-                                    DatePicker("", selection:  $rangeFilterStop).disabled(!dateFilterIsOn)
+                                    DatePicker("", selection: $rangeFilterStart)
+                                    DatePicker("", selection:  $rangeFilterStop)
                                         .padding(.bottom)
                                 }
                                 
@@ -221,6 +221,51 @@ struct RealTimeView: View {
                     }
                     .background(Color.white)
                     .cornerRadius(20)
+                    
+                    
+                    if (chartData?.count)! > 0 && filterIsOn && selectedDataType != "None" && selectedsender != "None"{
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 16) {
+                           
+                                GeometryReader { geometry in
+                                    
+                                    BarChartView(data: chartBarData!, colors: [Color.purple, Color.blue])
+                                        .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
+                                        .background(Color.white.cornerRadius(20))
+                                    
+                                        
+                                        
+                                }
+                                .frame(width: 300, height: 300)
+                                Divider()
+                                GeometryReader { geometry in
+                                    
+                                    VStack{
+                                        LineChart(chartData: data)
+                                            .pointMarkers(chartData: data)
+                                            .touchOverlay(chartData: data, specifier: "%s")
+                                            .floatingInfoBox(chartData: data)
+                                            .xAxisGrid(chartData: data)
+                                            .yAxisGrid(chartData: data)
+                                            .xAxisLabels(chartData: data)
+                                            .yAxisLabels(chartData: data)
+                                            .infoBox(chartData: data)
+                                            .headerBox(chartData: data)
+                                            .legends(chartData: data)
+                                            .id(data.id)
+                                            .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
+                                            .padding()
+                                        
+                                    }.background(Color.white.cornerRadius(20))
+                                    
+                                   
+                                }
+                                .frame(width: 300, height: 300)
+                               Spacer()
+                              Divider()
+                            }
+                        }
+                    }
                     
                     
                     ScrollView{
@@ -251,69 +296,38 @@ struct RealTimeView: View {
                             .padding(.bottom, 70)
                         
                     }
-                    .frame(height: 350)
+                    .frame(height: 350 )
                     .background(Color.white)
                     .cornerRadius(20)
                     
                     
+
                     
-                    
-                    
-                    
-                    VStack{
-                        if (chartData?.count)! > 0 && filterIsOn{
-                            
-                            
-                            BarChartView(data: chartBarData!, colors: [Color.purple, Color.blue])
-                                .frame(height: 300)
-                                .background(Color.white.cornerRadius(20))
-                            
-                            Spacer()
-                            
-                            VStack{
-                            LineChart(chartData: data)
-                                .pointMarkers(chartData: data)
-                                .touchOverlay(chartData: data, specifier: "%s")
-                                .floatingInfoBox(chartData: data)
-                                .xAxisGrid(chartData: data)
-                                .yAxisGrid(chartData: data)
-                                .xAxisLabels(chartData: data)
-                                .yAxisLabels(chartData: data)
-                                .infoBox(chartData: data)
-                                .headerBox(chartData: data)
-                                .legends(chartData: data)
-                                .id(data.id)
-                                .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 350, maxHeight: 400, alignment: .center)
-                                .padding()
-                                
-                            }.background(Color.white.cornerRadius(20))
-                                
-                            
-                        }
-                    }.frame(maxHeight: 700)
-                    
-                    
-                }.padding(.horizontal)
+                }.padding()
                 
                 
-            }else{
-                Text("Device not connected")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .foregroundColor(Color.red)
-                    .padding(.horizontal)
-                Text("Connect a device or import data").padding()
                 
-            }
+   
+            
+            
+        }else{
+            Text("Device not connected")
+                .font(.system(size: 20, weight: .bold, design: .default))
+                .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .foregroundColor(Color.red)
+                .padding(.horizontal)
+            Text("Connect a device or import data").padding()
             
         }
         
-        .background(Color(UIColor.systemGroupedBackground))
-        
-        
-        
-        
     }
+    
+        .background(Color(UIColor.systemGroupedBackground))
+    
+    
+    
+    
+}
 }
 
 
