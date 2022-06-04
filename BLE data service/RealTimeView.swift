@@ -19,6 +19,7 @@ struct RealTimeView: View {
     @State private var dateFilterIsOn = false
     @State private var rangeFilterStart = Date.now
     @State private var rangeFilterStop = Date.now
+    @State private var dropDownMenu = false
     
     
     var senders : [String] {
@@ -163,65 +164,36 @@ struct RealTimeView: View {
             
             if bleManager.listOfMessage.count > 0{
                 
-                VStack {
+                Button(action: {
                     
-                    Menu {
-                 
-                            VStack{
-                                
-                                
-                                HStack {
-                                    Text("Sender:")
-                                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                                    Picker("Please choose a sender", selection: $selectedsender) {
-                                        ForEach(senders, id: \.self) {
-                                            Text($0)
-                                        }
-                                    }.frame(alignment: .topLeading)
-                                }.padding(.horizontal)
-                                
-                                Divider()
-                                
-                                HStack {
-                                    Text("Data type:")
-                                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                                    Picker("Please choose a Data type", selection: $selectedDataType) {
-                                        ForEach(dataTypes, id: \.self) {
-                                            Text($0)
-                                        }
-                                    }.frame(alignment: .topLeading)
-                                    
-                                }.padding(.horizontal)
-                                
-                                Divider()
-                                
-                                HStack {
-                                    VStack{
-                                        Text("Date range")
-                                        Toggle("", isOn: $dateFilterIsOn).padding()
-                                        
-                                    }
-                                    
-                                    VStack{
-                                        DatePicker("", selection: $rangeFilterStart)
-                                        DatePicker("", selection:  $rangeFilterStop)
-                                            .padding(.bottom)
-                                    }
-                                    
-                                }.padding(.horizontal)
-                                
-                            }
-                            
-                            
-                        }
-                    } label: {
-                        Image(systemName: "bookmark.circle")
-                            .resizable()
-                            .frame(width:24.0, height: 24.0)
+                    withAnimation(Animation.spring()) {
+                        self.dropDownMenu.toggle()
+                        
                     }
                     
+                }) {
+                    Label("", systemImage: "arrow.up.and.down.circle")
+                        .padding(10)
+                        .frame(alignment: .center)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
+                        .background(Color.purple)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(50)
+                        .font(.title2)
+                        
+                        
+                }
+                
+         
+                
+                ZStack(alignment: .top) {
+                
+
+                   
                     
-                    if (chartData?.count)! > 0 && selectedDataType != "None" && selectedsender != "None"{
+                    VStack{
+                    if  (chartData?.count)! > 0 && selectedDataType != "None" && selectedsender != "None"{
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
                                 
@@ -230,10 +202,7 @@ struct RealTimeView: View {
                                     BarChartView(data: chartBarData!, colors: [Color.purple, Color.blue])
                                         .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
                                         .background(Color.white.cornerRadius(20))
-                                    
-                                    
-                                    
-                                    
+
                                 }
                                 
                                 
@@ -315,14 +284,69 @@ struct RealTimeView: View {
                             .padding(.bottom, 70)
                         
                     }
-                    .frame(height: 350 )
+                    .frame(maxHeight: .infinity )
                     .background(Color.white)
                     .cornerRadius(20)
                     
                     
+                    }
+                    
+                    
+                    
+                    if dropDownMenu{
+                    VStack{
+
+                        HStack {
+                            Text("Sender:")
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                                .padding(.top)
+                            Picker("Please choose a sender", selection: $selectedsender) {
+                                ForEach(senders, id: \.self) {
+                                    Text($0)
+                                }
+                            }.frame(alignment: .topLeading)
+                        }.padding(.horizontal)
+                        
+                        Divider()
+                        
+                        HStack {
+                            Text("Data type:")
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                            Picker("Please choose a Data type", selection: $selectedDataType) {
+                                ForEach(dataTypes, id: \.self) {
+                                    Text($0)
+                                }
+                            }.frame(alignment: .topLeading)
+                            
+                        }.padding(.horizontal)
+                        
+                        Divider()
+                        
+                        HStack {
+                            VStack{
+                                Text("Date range")
+                                Toggle("", isOn: $dateFilterIsOn).padding()
+                                
+                            }
+                            
+                            VStack{
+                                DatePicker("", selection: $rangeFilterStart)
+                                DatePicker("", selection:  $rangeFilterStop)
+                                    .padding(.bottom)
+                            }
+                            
+                        }.padding(.horizontal)
+
+                    }
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(20)
+     
+
+                    }
                     
                     
                 }.padding()
+                
                 
                 
                 
@@ -334,7 +358,7 @@ struct RealTimeView: View {
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .foregroundColor(Color.red)
-                    .padding(.horizontal)
+                    .padding()
                 Text("Connect a device or import data").padding()
                 
             }
