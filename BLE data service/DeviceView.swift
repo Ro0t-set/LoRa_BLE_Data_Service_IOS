@@ -53,8 +53,7 @@ struct DeviceView: View {
             
             if self.loadedFile  {
                 VStack{
-                    
-                Text("File uploaded successfully")
+                Label("File uploaded successfully", systemImage: "doc")
                     .font(.title3 .bold())
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color.green)

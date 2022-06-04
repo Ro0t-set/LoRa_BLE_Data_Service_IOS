@@ -16,10 +16,10 @@ struct RealTimeView: View {
     
     @State private var selectedsender = "None"
     @State private var selectedDataType = "None"
-    @State private var filterIsOn = false
     @State private var dateFilterIsOn = false
     @State private var rangeFilterStart = Date.now
     @State private var rangeFilterStop = Date.now
+    
     
     var senders : [String] {
         get {
@@ -121,20 +121,17 @@ struct RealTimeView: View {
     
     var recivedMessage : [BLEData]! {
         get {
-            if filterIsOn {
-                if dateFilterIsOn{
-                    return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
-                        .filter{
-                            Int($0.currentDateTime.timeIntervalSince1970) < Int(rangeFilterStop.timeIntervalSince1970)
-                            &&
-                            Int($0.currentDateTime.timeIntervalSince1970) > Int(rangeFilterStart.timeIntervalSince1970)
-                        }
-                }
+            
+            if dateFilterIsOn{
                 return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
-                
-            }else{
-                return bleManager.listOfMessage
+                    .filter{
+                        Int($0.currentDateTime.timeIntervalSince1970) < Int(rangeFilterStop.timeIntervalSince1970)
+                        &&
+                        Int($0.currentDateTime.timeIntervalSince1970) > Int(rangeFilterStart.timeIntervalSince1970)
+                    }
             }
+            return bleManager.messagefilterBySenderAndDataType(sender: selectedsender, dataType: selectedDataType)
+            
         }
     }
     
@@ -153,89 +150,93 @@ struct RealTimeView: View {
         
         
         
-        VStack (spacing: 10) {
+        VStack (spacing: 0) {
             
             
             
             Text("Real Time")
                 .font(.largeTitle .bold())
                 .frame( maxWidth: .infinity, alignment: .topLeading)
-                .padding()
+                .padding(.top)
+                .padding(.horizontal)
             
             
             if bleManager.listOfMessage.count > 0{
                 
-                ScrollView {
-                    VStack{
-                        Toggle("Apply filters to data", isOn: $filterIsOn)
-                            .padding()
-                        
-                        
-                        if filterIsOn {
-                            Divider()
-                            HStack {
-                                Text("Sender:")
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                Picker("Please choose a sender", selection: $selectedsender) {
-                                    ForEach(senders, id: \.self) {
-                                        Text($0)
-                                    }
-                                }.frame(alignment: .topLeading)
-                            }.padding(.horizontal)
-                            
-                            Divider()
-                            
-                            HStack {
-                                Text("Data type:")
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                Picker("Please choose a Data type", selection: $selectedDataType) {
-                                    ForEach(dataTypes, id: \.self) {
-                                        Text($0)
-                                    }
-                                }.frame(alignment: .topLeading)
+                VStack {
+                    
+                    Menu {
+                 
+                            VStack{
                                 
-                            }.padding(.horizontal)
-                            
-                            Divider()
-                            
-                            HStack {
-                                VStack{
-                                    Text("Date range")
-                                    Toggle("", isOn: $dateFilterIsOn).padding()
+                                
+                                HStack {
+                                    Text("Sender:")
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    Picker("Please choose a sender", selection: $selectedsender) {
+                                        ForEach(senders, id: \.self) {
+                                            Text($0)
+                                        }
+                                    }.frame(alignment: .topLeading)
+                                }.padding(.horizontal)
+                                
+                                Divider()
+                                
+                                HStack {
+                                    Text("Data type:")
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    Picker("Please choose a Data type", selection: $selectedDataType) {
+                                        ForEach(dataTypes, id: \.self) {
+                                            Text($0)
+                                        }
+                                    }.frame(alignment: .topLeading)
                                     
-                                }
+                                }.padding(.horizontal)
                                 
-                                VStack{
-                                    DatePicker("", selection: $rangeFilterStart)
-                                    DatePicker("", selection:  $rangeFilterStop)
-                                        .padding(.bottom)
-                                }
+                                Divider()
                                 
-                            }.padding(.horizontal)
-                            
-                            
+                                HStack {
+                                    VStack{
+                                        Text("Date range")
+                                        Toggle("", isOn: $dateFilterIsOn).padding()
+                                        
+                                    }
+                                    
+                                    VStack{
+                                        DatePicker("", selection: $rangeFilterStart)
+                                        DatePicker("", selection:  $rangeFilterStop)
+                                            .padding(.bottom)
+                                    }
+                                    
+                                }.padding(.horizontal)
+                                
+                            }
                             
                             
                         }
-                        
+                    } label: {
+                        Image(systemName: "bookmark.circle")
+                            .resizable()
+                            .frame(width:24.0, height: 24.0)
                     }
-                    .background(Color.white)
-                    .cornerRadius(20)
                     
                     
-                    if (chartData?.count)! > 0 && filterIsOn && selectedDataType != "None" && selectedsender != "None"{
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                           
+                    if (chartData?.count)! > 0 && selectedDataType != "None" && selectedsender != "None"{
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 16) {
+                                
                                 GeometryReader { geometry in
                                     
                                     BarChartView(data: chartBarData!, colors: [Color.purple, Color.blue])
                                         .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
                                         .background(Color.white.cornerRadius(20))
                                     
-                                        
-                                        
+                                    
+                                    
+                                    
                                 }
+                                
+                                
                                 .frame(width: 300, height: 300)
                                 Divider()
                                 GeometryReader { geometry in
@@ -256,13 +257,16 @@ struct RealTimeView: View {
                                             .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
                                             .padding()
                                         
+                                        
                                     }.background(Color.white.cornerRadius(20))
                                     
-                                   
+                                    
                                 }
                                 .frame(width: 300, height: 300)
-                               Spacer()
-                              Divider()
+                                
+                                
+                                Spacer()
+                                Divider()
                             }
                         }
                     }
@@ -270,15 +274,30 @@ struct RealTimeView: View {
                     
                     ScrollView{
                         ForEach(self.recivedMessage , id: \.self) { message in
+                            
                             VStack{
-                                Text(message.sender)
-                                    .font(.title3 .bold())
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                if self.selectedsender == "None"{
+                                    Text(message.sender)
+                                        .font(.title3 .bold())
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .foregroundColor(Color(randomColor(seed: message.sender)))
+                                }
                                 
                                 HStack {
-                                    Text(message.getKey())
-                                    Spacer()
+                                    if self.selectedDataType == "None"{
+                                        Text("\(message.getKey()): ")
+                                            .foregroundColor(Color(randomColor(seed: message.getKey())))
+                                        
+                                        Spacer()
+                                    }
+                                    
                                     Text(String(message.getValue()))
+                                        .frame(alignment: .leading)
+                                    
+                                    
+                                    if self.selectedDataType != "None"{
+                                        Spacer()
+                                    }
                                     
                                 }
                                 
@@ -301,33 +320,33 @@ struct RealTimeView: View {
                     .cornerRadius(20)
                     
                     
-
+                    
                     
                 }.padding()
                 
                 
                 
-   
-            
-            
-        }else{
-            Text("Device not connected")
-                .font(.system(size: 20, weight: .bold, design: .default))
-                .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .foregroundColor(Color.red)
-                .padding(.horizontal)
-            Text("Connect a device or import data").padding()
+                
+                
+                
+            }else{
+                Text("Device not connected")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .foregroundColor(Color.red)
+                    .padding(.horizontal)
+                Text("Connect a device or import data").padding()
+                
+            }
             
         }
         
-    }
-    
         .background(Color(UIColor.systemGroupedBackground))
-    
-    
-    
-    
-}
+        
+        
+        
+        
+    }
 }
 
 
