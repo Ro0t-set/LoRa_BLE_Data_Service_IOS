@@ -297,8 +297,8 @@ struct DataView: View {
                             .clipShape(Circle())
                             .shadow(radius: 10)
                             .cornerRadius(50)
-                            .offset(y: -40)
-                            .padding(.bottom, -50)
+                            .offset(y: 40)
+                            .padding(.bottom, -40)
                             
 
                             

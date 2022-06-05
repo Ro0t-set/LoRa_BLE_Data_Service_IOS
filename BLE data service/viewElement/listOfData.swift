@@ -49,7 +49,6 @@ struct listOfData: View {
             
         }
         .frame(maxHeight: .infinity )
-        .background(Color.white)
         .cornerRadius(20)
     }
     
