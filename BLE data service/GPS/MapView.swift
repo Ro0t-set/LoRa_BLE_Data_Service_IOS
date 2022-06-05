@@ -88,37 +88,8 @@ struct MapView: View {
                         .cornerRadius(20)
                         .shadow(radius: 3)
                         .padding()
-                    
-                    ScrollView{
-                        ForEach(self.info.aroundOfBleData ?? [ ] , id: \.self) { singolDataArround in
-                            
-                            VStack{
-                                Text(singolDataArround.sender)
-                                    .font(.title3 .bold())
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                HStack {
-                                    Text(singolDataArround.getKey())
-                                    Spacer()
-                                    Text(String(singolDataArround.getValue()))
                                     
-                                }
-                                
-                                Text( singolDataArround.getDataAsString())
-                                    .font(.caption)
-                                    .frame(maxWidth: .infinity, alignment: .bottomTrailing)
-                                
-                            }.padding()
-                                .background(Color.white)
-                                .cornerRadius(20)
-                                .shadow(radius: 3)
-                            
-                            
-                        }.padding()
-                            .padding(.bottom, 70)
-                        
-                    }
-                    
+                    listOfData(recivedMessage: self.info.aroundOfBleData ??  [ ])
                     
                 }
                 

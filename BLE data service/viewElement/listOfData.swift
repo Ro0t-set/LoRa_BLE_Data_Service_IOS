@@ -9,38 +9,31 @@ import SwiftUI
 
 struct listOfData: View {
     var recivedMessage : [BLEData]
-    var selectedsender : String
-    var selectedDataType : String
+    var selectedsender : String = "None"
+    var selectedDataType : String = "None"
     var body: some View {
         ScrollView{
             ForEach(self.recivedMessage , id: \.self) { message in
                 
                 VStack{
                     if self.selectedsender == "None"{
-                        Text(message.sender)
-                            .font(.title3 .bold())
+                        Text("Sender: \(message.sender)")
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        
                     }
                     
-                    HStack {
+                    Spacer()
+                    
+                  
                         if self.selectedDataType == "None"{
-                            Text("\(message.getKey()): ")
-                            
-                            
-                            Spacer()
-                        }
+                            Text("\(message.getKey()): \(message.getValue())")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }else{
                         
                         Text(String(message.getValue()))
-                            .frame(alignment: .leading)
-                        
-                        
-                        if self.selectedDataType != "None"{
-                            Spacer()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
                         }
-                        
-                    }
-                    
+                        Spacer()
                     Text( message.getDataAsString())
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .bottomTrailing)
@@ -48,7 +41,7 @@ struct listOfData: View {
                 }.padding()
                     .background(Color(UIColor.systemBackground))
                     .cornerRadius(20)
-                    .shadow(radius: 5)
+                    .shadow(radius: 3)
                 
                 
             }.padding()

@@ -17,7 +17,7 @@
 		3839C7012818337F0064292D /* BLE_data_serviceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7002818337F0064292D /* BLE_data_serviceUITests.swift */; };
 		3839C7032818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7022818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift */; };
 		3839C71028183CE40064292D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C70F28183CE40064292D /* MainView.swift */; };
-		3839C71228183D6F0064292D /* RealTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C71128183D6F0064292D /* RealTimeView.swift */; };
+		3839C71228183D6F0064292D /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C71128183D6F0064292D /* DataView.swift */; };
 		3839C71428183D8D0064292D /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C71328183D8D0064292D /* LogView.swift */; };
 		3839C7232819A7AC0064292D /* BLEManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3839C7222819A7AC0064292D /* BLEManage.swift */; };
 		38427414281E9FAA002EFDF3 /* BLEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38427413281E9FAA002EFDF3 /* BLEData.swift */; };
@@ -69,7 +69,7 @@
 		3839C7002818337F0064292D /* BLE_data_serviceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceUITests.swift; sourceTree = "<group>"; };
 		3839C7022818337F0064292D /* BLE_data_serviceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE_data_serviceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3839C70F28183CE40064292D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		3839C71128183D6F0064292D /* RealTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeView.swift; sourceTree = "<group>"; };
+		3839C71128183D6F0064292D /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		3839C71328183D8D0064292D /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		3839C7222819A7AC0064292D /* BLEManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManage.swift; sourceTree = "<group>"; };
 		38427413281E9FAA002EFDF3 /* BLEData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEData.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 				38427412281E9F67002EFDF3 /* Device */,
 				3839C7212819A78A0064292D /* BLE */,
 				3839C71328183D8D0064292D /* LogView.swift */,
-				3839C71128183D6F0064292D /* RealTimeView.swift */,
+				3839C71128183D6F0064292D /* DataView.swift */,
 				38657FC32822A32400C1D4DE /* DeviceMapView.swift */,
 				3839C70F28183CE40064292D /* MainView.swift */,
 				3839C6E5281833790064292D /* BLE_data_serviceApp.swift */,
@@ -390,7 +390,7 @@
 				3839C71028183CE40064292D /* MainView.swift in Sources */,
 				38657FBC2822802C00C1D4DE /* LineView.swift in Sources */,
 				38657FC42822A32400C1D4DE /* DeviceMapView.swift in Sources */,
-				3839C71228183D6F0064292D /* RealTimeView.swift in Sources */,
+				3839C71228183D6F0064292D /* DataView.swift in Sources */,
 				38657FBE2822804800C1D4DE /* LineChartCircleView.swift in Sources */,
 				38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */,
 				38B8BBD4284CB8B6002244B7 /* listOfData.swift in Sources */,

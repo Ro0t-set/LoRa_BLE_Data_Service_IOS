@@ -23,8 +23,8 @@ struct MainView: View {
                 .tabItem{
                     Label("Device", systemImage: "ferry")
                 }
-            RealTimeView().tabItem{
-                Label("Real Time", systemImage: "arrow.triangle.2.circlepath.circle")
+            DataView().tabItem{
+                Label("Data", systemImage: "chart.bar.doc.horizontal")
             }
             DeviceMapView().tabItem{
                 Label("Map", systemImage: "map")

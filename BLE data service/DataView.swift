@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICharts
 
-struct RealTimeView: View {
+struct DataView: View {
     
     
     @ObservedObject var bleManager = BLEManager.shared()
@@ -155,7 +155,7 @@ struct RealTimeView: View {
             
             
             
-            Text("Real Time")
+            Text("Data")
                 .font(.largeTitle .bold())
                 .frame( maxWidth: .infinity, alignment: .topLeading)
                 .padding(.top)
@@ -342,7 +342,7 @@ struct RealTimeView: View {
 struct MyDeviceView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RealTimeView()
+            DataView()
             
             
         }
