@@ -164,33 +164,11 @@ struct RealTimeView: View {
             
             if bleManager.listOfMessage.count > 0{
                 
-                Button(action: {
-                    
-                    withAnimation(Animation.spring()) {
-                        self.dropDownMenu.toggle()
-                        
-                    }
-                    
-                }) {
-                    Label("", systemImage: "arrow.up.and.down.circle")
-                        .padding(10)
-                        .frame(alignment: .center)
-                        .clipShape(Circle())
-                        .shadow(radius: 4)
-                        .background(Color.purple)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(50)
-                        .font(.title2)
-                        
-                        
-                }
-                
-         
+
                 
                 ZStack(alignment: .top) {
-                
+                    
 
-                   
                     
                     VStack{
                     if  (chartData?.count)! > 0 && selectedDataType != "None" && selectedsender != "None"{
@@ -241,52 +219,7 @@ struct RealTimeView: View {
                     }
                     
                     
-                    ScrollView{
-                        ForEach(self.recivedMessage , id: \.self) { message in
-                            
-                            VStack{
-                                if self.selectedsender == "None"{
-                                    Text(message.sender)
-                                        .font(.title3 .bold())
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .foregroundColor(Color(randomColor(seed: message.sender)))
-                                }
-                                
-                                HStack {
-                                    if self.selectedDataType == "None"{
-                                        Text("\(message.getKey()): ")
-                                            .foregroundColor(Color(randomColor(seed: message.getKey())))
-                                        
-                                        Spacer()
-                                    }
-                                    
-                                    Text(String(message.getValue()))
-                                        .frame(alignment: .leading)
-                                    
-                                    
-                                    if self.selectedDataType != "None"{
-                                        Spacer()
-                                    }
-                                    
-                                }
-                                
-                                Text( message.getDataAsString())
-                                    .font(.caption)
-                                    .frame(maxWidth: .infinity, alignment: .bottomTrailing)
-                                
-                            }.padding()
-                                .background(Color(UIColor.systemBackground))
-                                .cornerRadius(20)
-                                .shadow(radius: 5)
-                            
-                            
-                        }.padding()
-                            .padding(.bottom, 70)
-                        
-                    }
-                    .frame(maxHeight: .infinity )
-                    .background(Color.white)
-                    .cornerRadius(20)
+                        listOfData(recivedMessage: self.recivedMessage, selectedsender:self.selectedsender, selectedDataType: self.selectedDataType)
                     
                     
                     }
@@ -299,13 +232,13 @@ struct RealTimeView: View {
                         HStack {
                             Text("Sender:")
                                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                                .padding(.top)
                             Picker("Please choose a sender", selection: $selectedsender) {
                                 ForEach(senders, id: \.self) {
                                     Text($0)
                                 }
                             }.frame(alignment: .topLeading)
                         }.padding(.horizontal)
+                            .padding(.top, 50)
                         
                         Divider()
                         
@@ -338,11 +271,43 @@ struct RealTimeView: View {
                         }.padding(.horizontal)
 
                     }
-                    .background(.ultraThinMaterial)
+
+                    .background(.regularMaterial,
+                                        in: RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                    )
                     .cornerRadius(20)
+                    
+ 
      
 
                     }
+                    
+                    
+                    Button(action: {
+                        
+                        withAnimation(Animation.spring()) {
+                            self.dropDownMenu.toggle()
+                            
+                        }
+                        
+                    }) {
+                        Image(systemName: "magnifyingglass.circle")
+                            .frame(alignment: .center)
+                            .font(.system(size: 45.0, weight: .bold))
+                            .clipShape(Circle())
+                            .shadow(radius: 10)
+                            .cornerRadius(50)
+                            .offset(y: -40)
+                            .padding(.bottom, -50)
+                            
+
+                            
+                            
+                            
+                    }
+                
+
+                   
                     
                     
                 }.padding()

@@ -33,6 +33,7 @@
 		38657FC72822A47000C1D4DE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38657FC62822A47000C1D4DE /* LocationManager.swift */; };
 		386F8DD0283567160015F66C /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 386F8DCF283567160015F66C /* FilePicker */; };
 		3890CBC3283A6A4000597133 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3890CBC2283A6A4000597133 /* Launch Screen.storyboard */; };
+		38B8BBD4284CB8B6002244B7 /* listOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B8BBD3284CB8B6002244B7 /* listOfData.swift */; };
 		38F32B4E2845227F00818C4A /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 38F32B4D2845227F00818C4A /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		38657FC62822A47000C1D4DE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BLE-data-service-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3890CBC2283A6A4000597133 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		38B8BBD3284CB8B6002244B7 /* listOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		3839C6E4281833790064292D /* BLE data service */ = {
 			isa = PBXGroup;
 			children = (
+				38B8BBD2284CB88E002244B7 /* viewElement */,
 				3831038B282DA2C000E66545 /* Log */,
 				3831038A282D71DA00E66545 /* BLE data service.entitlements */,
 				38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */,
@@ -226,6 +229,14 @@
 				38310388282D0ED000E66545 /* randomColor.swift */,
 			);
 			path = GPS;
+			sourceTree = "<group>";
+		};
+		38B8BBD2284CB88E002244B7 /* viewElement */ = {
+			isa = PBXGroup;
+			children = (
+				38B8BBD3284CB8B6002244B7 /* listOfData.swift */,
+			);
+			path = viewElement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +393,7 @@
 				3839C71228183D6F0064292D /* RealTimeView.swift in Sources */,
 				38657FBE2822804800C1D4DE /* LineChartCircleView.swift in Sources */,
 				38657FAC28208B2B00C1D4DE /* BLEDataFilter.swift in Sources */,
+				38B8BBD4284CB8B6002244B7 /* listOfData.swift in Sources */,
 				3831038F282E88B100E66545 /* ActivityViewController.swift in Sources */,
 				38657FB92821775900C1D4DE /* BarChartView.swift in Sources */,
 				3839C71428183D8D0064292D /* LogView.swift in Sources */,
