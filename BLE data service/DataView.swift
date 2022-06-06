@@ -20,6 +20,8 @@ struct DataView: View {
     @State private var rangeFilterStart = Date.now
     @State private var rangeFilterStop = Date.now
     @State private var dropDownMenu = false
+    @State private var isChartsShowing = false
+    
     
     
     var senders : [String] {
@@ -175,6 +177,7 @@ struct DataView: View {
                             .frame( maxWidth: .infinity, alignment: .topLeading)
                             .font(.caption)
                             .padding(.horizontal)
+
                     }
     
                     Button("Edit...", action:{

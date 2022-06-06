@@ -58,7 +58,7 @@ struct ChartView: View {
                                pointStyle: PointStyle(),
                                style: LineStyle(lineColour: ColourStyle(colour: .red), lineType: .curvedLine))
         
-        let metadata   = ChartMetadata(title: "Line chart", subtitle: "linear distribution of points")
+        let metadata   = ChartMetadata( subtitle: "Linear distribution of points")
         
         let gridStyle  = GridStyle(numberOfLines: 8,
                                    lineColour   : Color(.lightGray).opacity(0.5),
@@ -85,7 +85,7 @@ struct ChartView: View {
                                         baseline            : .minimumWithMaximum(of: 0),
                                         topLine             : .maximum(of: data.maxValue()),
                                         
-                                        globalAnimation     : .easeOut(duration: 1))
+                                        globalAnimation     : .linear(duration: 0.0))
         
         return LineChartData(dataSets       : data,
                              metadata       : metadata,
@@ -118,6 +118,7 @@ struct ChartView: View {
                                                 lineChartdata: getLineChartData(sender: sender, dataType: dataType),
                                                 sender: sender,
                                                 dataType: dataType)
+
                             
                         }
                     }

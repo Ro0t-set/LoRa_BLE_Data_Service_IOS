@@ -252,6 +252,7 @@ struct DeviceView: View {
                     Button(action: {
                         
                         self.bleManager.disconnect()
+                        self.bleManager.listOfMessage = [ ]
                         
                     }) {
                         
