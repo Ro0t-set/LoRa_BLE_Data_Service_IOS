@@ -26,6 +26,9 @@ struct MainView: View {
             DataView().tabItem{
                 Label("Data", systemImage: "chart.bar.doc.horizontal")
             }
+            ChartView().tabItem{
+                Label("Chart", systemImage: "chart.bar.xaxis")
+            }
             DeviceMapView().tabItem{
                 Label("Map", systemImage: "map")
             }

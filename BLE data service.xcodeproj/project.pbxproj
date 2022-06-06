@@ -34,6 +34,8 @@
 		386F8DD0283567160015F66C /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 386F8DCF283567160015F66C /* FilePicker */; };
 		3890CBC3283A6A4000597133 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3890CBC2283A6A4000597133 /* Launch Screen.storyboard */; };
 		38B8BBD4284CB8B6002244B7 /* listOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B8BBD3284CB8B6002244B7 /* listOfData.swift */; };
+		38BA3D5B284E131E00D17281 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BA3D5A284E131E00D17281 /* ChartView.swift */; };
+		38BA3D5D284E23D000D17281 /* HorizontalChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BA3D5C284E23D000D17281 /* HorizontalChartView.swift */; };
 		38F32B4E2845227F00818C4A /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 38F32B4D2845227F00818C4A /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,8 @@
 		38657FC82822A6CB00C1D4DE /* BLE-data-service-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BLE-data-service-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3890CBC2283A6A4000597133 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		38B8BBD3284CB8B6002244B7 /* listOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfData.swift; sourceTree = "<group>"; };
+		38BA3D5A284E131E00D17281 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		38BA3D5C284E23D000D17281 /* HorizontalChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 				3839C71128183D6F0064292D /* DataView.swift */,
 				38657FC32822A32400C1D4DE /* DeviceMapView.swift */,
 				3839C70F28183CE40064292D /* MainView.swift */,
+				38BA3D5A284E131E00D17281 /* ChartView.swift */,
 				3839C6E5281833790064292D /* BLE_data_serviceApp.swift */,
 				3839C6E7281833790064292D /* DeviceView.swift */,
 				3839C6E92818337F0064292D /* Assets.xcassets */,
@@ -217,6 +222,7 @@
 				38657FBB2822802C00C1D4DE /* LineView.swift */,
 				38657FBD2822804800C1D4DE /* LineChartCircleView.swift */,
 				38657FBF2822809800C1D4DE /* LineChartView.swift */,
+				38BA3D5C284E23D000D17281 /* HorizontalChartView.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -383,6 +389,8 @@
 				38657FB72821773100C1D4DE /* BarView.swift in Sources */,
 				385E6FB9282C0AB20011F52A /* MapView.swift in Sources */,
 				38427414281E9FAA002EFDF3 /* BLEData.swift in Sources */,
+				38BA3D5B284E131E00D17281 /* ChartView.swift in Sources */,
+				38BA3D5D284E23D000D17281 /* HorizontalChartView.swift in Sources */,
 				38657FC72822A47000C1D4DE /* LocationManager.swift in Sources */,
 				3839C7232819A7AC0064292D /* BLEManage.swift in Sources */,
 				38657FC02822809800C1D4DE /* LineChartView.swift in Sources */,

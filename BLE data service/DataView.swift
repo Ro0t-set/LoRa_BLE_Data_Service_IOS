@@ -199,9 +199,7 @@ struct DataView: View {
 
                 
                 ZStack(alignment: .top) {
-                    
-
-                    
+    
                     VStack{
                     if  (chartData?.count)! > 0 && selectedDataType != "None" && selectedsender != "None"{
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -223,7 +221,7 @@ struct DataView: View {
                                     VStack{
                                         LineChart(chartData: data)
                                             .pointMarkers(chartData: data)
-                                            .touchOverlay(chartData: data, specifier: "%s")
+                                            .touchOverlay(chartData: data, specifier: "%d")
                                             .floatingInfoBox(chartData: data)
                                             .xAxisGrid(chartData: data)
                                             .yAxisGrid(chartData: data)
