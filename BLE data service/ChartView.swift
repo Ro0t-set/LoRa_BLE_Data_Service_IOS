@@ -12,11 +12,6 @@ struct ChartView: View {
     @ObservedObject var bleManager = BLEManager.shared()
     
     
-    @State private var selectedsender = "3432"
-    @State private var selectedDataType = "233"
-
-    
-    
     var senders : [String] {
         get {
             return getAllSender(messageas: bleManager.listOfMessage)
@@ -59,13 +54,13 @@ struct ChartView: View {
     
     func getLineChartData(sender : String, dataType: String) -> LineChartData{
         let data = LineDataSet(dataPoints: getLineChartDataPoint(sender: sender, dataType: dataType)!,
-                               legendTitle: selectedDataType,
+                               legendTitle: dataType,
                                pointStyle: PointStyle(),
                                style: LineStyle(lineColour: ColourStyle(colour: .red), lineType: .curvedLine))
         
         let metadata   = ChartMetadata(title: "Line chart", subtitle: "linear distribution of points")
         
-        let gridStyle  = GridStyle(numberOfLines: 10,
+        let gridStyle  = GridStyle(numberOfLines: 8,
                                    lineColour   : Color(.lightGray).opacity(0.5),
                                    lineWidth    : 1,
                                    dash         : [8],
@@ -103,12 +98,9 @@ struct ChartView: View {
     
     var body: some View {
         
-        
-        
+
         VStack (spacing: 0) {
-            
-            
-            
+          
             Text("Charts")
                 .font(.largeTitle .bold())
                 .frame( maxWidth: .infinity, alignment: .topLeading)
@@ -123,12 +115,14 @@ struct ChartView: View {
                         ForEach(self.dataTypes, id: \.self) { dataType in
                            
                             HorizontalChartView(chartBarData: getChartData(sender: sender, dataType: dataType)!,
-                                                lineChartdata: getLineChartData(sender: sender, dataType: dataType))
+                                                lineChartdata: getLineChartData(sender: sender, dataType: dataType),
+                                                sender: sender,
+                                                dataType: dataType)
                             
                         }
                     }
                     
-                }
+                }.padding()
                 
                 
                 

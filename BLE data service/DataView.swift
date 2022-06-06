@@ -78,9 +78,7 @@ struct DataView: View {
                                    pointStyle: PointStyle(),
                                    style: LineStyle(lineColour: ColourStyle(colour: .red), lineType: .curvedLine))
             
-            let metadata   = ChartMetadata(title: "Line chart", subtitle: "linear distribution of points")
-            
-            let gridStyle  = GridStyle(numberOfLines: 10,
+            let gridStyle  = GridStyle(numberOfLines: 8,
                                        lineColour   : Color(.lightGray).opacity(0.5),
                                        lineWidth    : 1,
                                        dash         : [8],
@@ -108,7 +106,6 @@ struct DataView: View {
                                             globalAnimation     : .easeOut(duration: 1))
             
             return LineChartData(dataSets       : data,
-                                 metadata       : metadata,
                                  chartStyle     : chartStyle)
         }
     }
@@ -201,51 +198,12 @@ struct DataView: View {
                 ZStack(alignment: .top) {
     
                     VStack{
-                    if  (chartData?.count)! > 0 && selectedDataType != "None" && selectedsender != "None"{
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
+                    if   selectedDataType != "None" && selectedsender != "None"{
+                        
+                        HorizontalChartView(chartBarData: chartBarData!, lineChartdata: data)
+                        .frame(height:310)
+                
                                 
-                                GeometryReader { geometry in
-                                    
-                                    BarChartView(data: chartBarData!, colors: [Color.purple, Color.blue])
-                                        .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
-                                        .background(Color.white.cornerRadius(20))
-
-                                }
-                                
-                                
-                                .frame(width: 300, height: 300)
-                                Divider()
-                                GeometryReader { geometry in
-                                    
-                                    VStack{
-                                        LineChart(chartData: data)
-                                            .pointMarkers(chartData: data)
-                                            .touchOverlay(chartData: data, specifier: "%d")
-                                            .floatingInfoBox(chartData: data)
-                                            .xAxisGrid(chartData: data)
-                                            .yAxisGrid(chartData: data)
-                                            .xAxisLabels(chartData: data)
-                                            .yAxisLabels(chartData: data)
-                                            .infoBox(chartData: data)
-                                            .headerBox(chartData: data)
-                                            .legends(chartData: data)
-                                            .id(data.id)
-                                            .frame(minWidth: 300, maxWidth: 900, minHeight: 150, idealHeight: 300, maxHeight: 400, alignment: .center)
-                                            .padding()
-                                        
-                                        
-                                    }.background(Color.white.cornerRadius(20))
-                                    
-                                    
-                                }
-                                .frame(width: 300, height: 300)
-                                
-                                
-                                Spacer()
-                                Divider()
-                            }
-                        }
                     }
                     
                     
