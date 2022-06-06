@@ -17,6 +17,7 @@ struct Place: Identifiable {
     let date: Date
     let aroundOfBleData: [BLEData]?
     
+    
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
@@ -42,6 +43,7 @@ struct MapView: View {
     @State var info : Place
     @State private var position = CardPosition.middle
     @State private var background = BackgroundStyle.blur
+    @State private var animationAmount = 0
     
     var body: some View {
         
@@ -73,6 +75,7 @@ struct MapView: View {
             
             
             SlideOverCard($position, backgroundStyle: $background ) {
+                
                 VStack {
                     Text("Info").font(.title)
                     
@@ -80,14 +83,17 @@ struct MapView: View {
                         Text("Name: \(self.info.name)")
                             .frame( maxWidth: .infinity, alignment: .topLeading)
                             .padding()
+                            .transition(AnyTransition.opacity.animation(.easeInOut(duration:0.3)))
                         Text("Deta: \(self.info.date)")
                             .frame( maxWidth: .infinity, alignment: .topLeading)
                             .padding()
+                            .transition(AnyTransition.opacity.animation(.easeInOut(duration:0.3)))
                         
                     }.background(Color.white)
                         .cornerRadius(20)
                         .shadow(radius: 3)
                         .padding()
+                        .transition(AnyTransition.opacity.animation(.easeInOut(duration:0.3)))
                                     
                     listOfData(recivedMessage: self.info.aroundOfBleData ??  [ ])
                     

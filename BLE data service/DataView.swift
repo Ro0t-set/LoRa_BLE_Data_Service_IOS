@@ -164,6 +164,38 @@ struct DataView: View {
             
             if bleManager.listOfMessage.count > 0{
                 
+                HStack{
+                    VStack{
+                        Text("Sender: \(self.selectedsender)")
+                            .frame( maxWidth: .infinity, alignment: .topLeading)
+                            .font(.caption)
+                            .padding(.horizontal)
+                        Text("Data type: \(self.selectedDataType)")
+                            .frame( maxWidth: .infinity, alignment: .topLeading)
+                            .font(.caption)
+                            .padding(.horizontal)
+                        Text("Date filter: \(String(self.dateFilterIsOn))")
+                            .frame( maxWidth: .infinity, alignment: .topLeading)
+                            .font(.caption)
+                            .padding(.horizontal)
+                    }
+    
+                    Button("Edit...", action:{
+                        self.dropDownMenu.toggle()
+
+                        
+                    })
+                    .padding(.horizontal)
+                    .buttonStyle(.bordered)
+   
+                    
+                }.padding(.horizontal)
+                
+                    
+
+    
+                
+                
 
                 
                 ZStack(alignment: .top) {
@@ -238,7 +270,7 @@ struct DataView: View {
                                 }
                             }.frame(alignment: .topLeading)
                         }.padding(.horizontal)
-                            .padding(.top, 50)
+                        .padding(.top)
                         
                         Divider()
                         
@@ -250,6 +282,7 @@ struct DataView: View {
                                     Text($0)
                                 }
                             }.frame(alignment: .topLeading)
+                            
                             
                         }.padding(.horizontal)
                         
@@ -269,12 +302,24 @@ struct DataView: View {
                             }
                             
                         }.padding(.horizontal)
+                        
+                        
+                        
+                        Button(action: {
+  
+                                self.dropDownMenu.toggle()
+   
+                        }) {
+                            Image(systemName: "chevron.compact.up")
+                                .frame(alignment: .center)
+                                .font(.system(size: 25.0, weight: .bold))
+                                .padding()
+                           
+                        }
 
                     }
 
-                    .background(.regularMaterial,
-                                        in: RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                    )
+                    .background(.ultraThinMaterial)
                     .cornerRadius(20)
                     
  
@@ -283,33 +328,7 @@ struct DataView: View {
                     }
                     
                     
-                    Button(action: {
-                        
-                        withAnimation(Animation.spring()) {
-                            self.dropDownMenu.toggle()
-                            
-                        }
-                        
-                    }) {
-                        Image(systemName: "magnifyingglass.circle")
-                            .frame(alignment: .center)
-                            .font(.system(size: 45.0, weight: .bold))
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .cornerRadius(50)
-                            .offset(y: 40)
-                            .padding(.bottom, -40)
-                            
 
-                            
-                            
-                            
-                    }
-                
-
-                   
-                    
-                    
                 }.padding()
                 
                 

@@ -52,6 +52,7 @@ struct DeviceView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             if self.loadedFile  {
+                withAnimation{
                 VStack{
                 Label("File uploaded successfully", systemImage: "doc")
                     .font(.title3 .bold())
@@ -71,7 +72,7 @@ struct DeviceView: View {
                     
                 Button(action: {
                     self.bleManager.listOfMessage = [ ]
-                    self.loadedFile = false
+                    self.loadedFile.toggle()
                     }) {
                         Text("Unallocate file")
                             .frame(maxWidth: .infinity)
@@ -88,6 +89,7 @@ struct DeviceView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .shadow(radius: 3)
+                }
                 
             }
             
@@ -202,7 +204,7 @@ struct DeviceView: View {
                                     self.fileUrl = try String(contentsOf: urls[0])
                                     self.bleManager.dataLoading(data: text)
                                     if(self.bleManager.listOfMessage.count > 0){
-                                        self.loadedFile = true
+                                        self.loadedFile.toggle()
                                     }
                                     
                                 }

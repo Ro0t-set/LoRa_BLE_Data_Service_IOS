@@ -37,6 +37,7 @@ struct listOfData: View {
                     Text( message.getDataAsString())
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .bottomTrailing)
+                        .foregroundColor(Color(UIColor.lightGray))
                     
                 }.padding()
                     .background(Color(UIColor.systemBackground))
