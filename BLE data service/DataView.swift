@@ -179,6 +179,8 @@ struct DataView: View {
                             .padding(.horizontal)
 
                     }
+                    
+                    VStack{
     
                     Button("Edit...", action:{
                         self.dropDownMenu.toggle()
@@ -187,26 +189,31 @@ struct DataView: View {
                     })
                     .padding(.horizontal)
                     .buttonStyle(.bordered)
-   
+                    .frame(alignment: .topTrailing)
+                    
+                    
+                    if  chartBarData?.count ?? 0 > 0 && self.selectedDataType != "None" && self.selectedsender != "None" {
+                        Button("Show charts", action:{
+                            self.isChartsShowing.toggle()
+
+
+                        })
+                        .padding(.horizontal)
+                        .buttonStyle(.bordered)
+                        .frame(alignment: .topTrailing)
+                    }else{
+                        Text("")
+                            .font(.caption)
+                            .foregroundColor(Color(UIColor.darkGray))
+                            .onAppear{
+                                self.isChartsShowing = false
+                            }
+                    }
+                    }.frame(alignment: .topTrailing)
                     
                 }.padding(.horizontal)
                 
-                if  chartBarData?.count ?? 0 > 0 && self.selectedDataType != "None" && self.selectedsender != "None" {
-                    Button("Show charts", action:{
-                        self.isChartsShowing.toggle()
 
-
-                    })
-                    .padding(.horizontal)
-                    .buttonStyle(.bordered)
-                }else{
-                    Text("Data not suitable for generating a chart")
-                        .font(.caption)
-                        .foregroundColor(Color(UIColor.darkGray))
-                        .onAppear{
-                            self.isChartsShowing = false
-                        }
-                }
                 
                     
 
