@@ -191,6 +191,23 @@ struct DataView: View {
                     
                 }.padding(.horizontal)
                 
+                if  chartBarData?.count ?? 0 > 0 && self.selectedDataType != "None" && self.selectedsender != "None" {
+                    Button("Show charts", action:{
+                        self.isChartsShowing.toggle()
+
+
+                    })
+                    .padding(.horizontal)
+                    .buttonStyle(.bordered)
+                }else{
+                    Text("Data not suitable for generating a chart")
+                        .font(.caption)
+                        .foregroundColor(Color(UIColor.darkGray))
+                        .onAppear{
+                            self.isChartsShowing = false
+                        }
+                }
+                
                     
 
     
@@ -201,7 +218,7 @@ struct DataView: View {
                 ZStack(alignment: .top) {
     
                     VStack{
-                    if   selectedDataType != "None" && selectedsender != "None"{
+                        if   self.selectedDataType != "None" && self.selectedsender != "None" && self.isChartsShowing{
                         
                         HorizontalChartView(chartBarData: chartBarData!, lineChartdata: data)
                         .frame(height:300)
