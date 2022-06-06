@@ -42,7 +42,7 @@ struct HorizontalChartView: View {
                         
                         LineChart(chartData: lineChartdata)
                             .pointMarkers(chartData: lineChartdata)
-                            .touchOverlay(chartData: lineChartdata, specifier: "%d")
+                            .touchOverlay(chartData: lineChartdata)
                             .floatingInfoBox(chartData: lineChartdata)
                             .xAxisGrid(chartData: lineChartdata)
                             .yAxisGrid(chartData: lineChartdata)

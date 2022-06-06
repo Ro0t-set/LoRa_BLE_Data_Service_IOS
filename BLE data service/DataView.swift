@@ -201,7 +201,7 @@ struct DataView: View {
                     if   selectedDataType != "None" && selectedsender != "None"{
                         
                         HorizontalChartView(chartBarData: chartBarData!, lineChartdata: data)
-                        .frame(height:310)
+                        .frame(height:300)
                 
                                 
                     }
