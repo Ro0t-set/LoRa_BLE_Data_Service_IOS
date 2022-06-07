@@ -18,14 +18,19 @@ struct HorizontalChartView: View {
     var body: some View {
         if  chartBarData.count > 0{
             VStack{
+                Spacer()
                 Divider()
+                Spacer()
                 if self.sender != ""{
-                    Text("Sender: \(self.sender)")
+                    Text("Sender:  \(self.sender)")
                         .frame( maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color(UIColor.darkGray))
+                        .font(.title3)
                 }
                 if self.dataType != ""{
-                    Text("Sender: \(self.dataType)")
+                    Text("Data type:  \(self.dataType)")
                         .frame( maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color(UIColor.darkGray))
                 }
                 
                 
@@ -63,6 +68,7 @@ struct HorizontalChartView: View {
                         
                         Spacer()
                         Divider()
+                        
                     }
                     
                 }

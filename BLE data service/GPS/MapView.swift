@@ -84,10 +84,12 @@ struct MapView: View {
                             .frame( maxWidth: .infinity, alignment: .topLeading)
                             .padding()
                             .transition(AnyTransition.opacity.animation(.easeInOut(duration:0.3)))
+                            .foregroundColor(Color(UIColor.darkGray))
                         Text("Deta: \(self.info.date)")
                             .frame( maxWidth: .infinity, alignment: .topLeading)
                             .padding()
                             .transition(AnyTransition.opacity.animation(.easeInOut(duration:0.3)))
+                            .foregroundColor(Color(UIColor.darkGray))
                         
                     }.background(Color.white)
                         .cornerRadius(20)

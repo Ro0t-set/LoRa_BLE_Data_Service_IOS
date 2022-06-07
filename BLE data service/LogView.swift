@@ -120,7 +120,10 @@ struct LogView: View {
             
             ZStack{
                 ScrollView {
-                    Text(logs).font(.caption).padding()
+                    Text(logs)
+                        .font(.caption)
+                        .padding()
+                        .foregroundColor(Color(UIColor.darkGray))
                     
                     
                     

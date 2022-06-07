@@ -63,18 +63,24 @@ struct DeviceView: View {
   
                     
                     Text("""
-                         Date from
-                         \(self.bleManager.listOfMessage.first!.getDataAsString())
-                         to \(self.bleManager.listOfMessage.last!.getDataAsString())
+                         From: \(self.bleManager.listOfMessage.first!.getDataAsString())
                          """)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
+                        .foregroundColor(Color(UIColor.darkGray))
+                    
+                    Text("""
+                         to: \(self.bleManager.listOfMessage.last!.getDataAsString())
+                         """)
+                        .frame(maxWidth: .infinity,  alignment: .leading)
+                        .padding()
+                        .foregroundColor(Color(UIColor.darkGray))
                     
                 Button(action: {
                     self.bleManager.listOfMessage = [ ]
                     self.loadedFile.toggle()
                     }) {
-                        Text("Unallocate file")
+                        Text("Unlink file")
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 10)
                             .font(.system(size: 24, weight: .bold, design: .default))
@@ -89,6 +95,7 @@ struct DeviceView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .shadow(radius: 3)
+                .frame(maxWidth: .infinity)
                 }
                 
             }
@@ -127,6 +134,7 @@ struct DeviceView: View {
                             .font(.system(size: 45, weight: .bold, design: .default))
                         Spacer()
                         Toggle("Send position", isOn: $sendGpsData).padding()
+                            .foregroundColor(Color(UIColor.darkGray))
                     }
                     
                     
@@ -145,14 +153,18 @@ struct DeviceView: View {
                     Spacer()
                     HStack {
                         Text("Status")
+                            .foregroundColor(Color(UIColor.darkGray))
                         Spacer()
                         Text("Connect")
+                            .foregroundColor(Color(UIColor.darkGray))
                     }.padding()
                     Spacer()
                     HStack {
                         Text("Identifier")
+                            .foregroundColor(Color(UIColor.darkGray))
                         Spacer()
                         Text("\(self.bleManager.device.identifier)")
+                            .foregroundColor(Color(UIColor.darkGray))
                     }.padding()
                     
                     
@@ -177,7 +189,7 @@ struct DeviceView: View {
             
             Spacer()
             
-            VStack (spacing: 10) {
+            VStack (spacing: 0) {
                 if (!bleManager.isConnected && !bleManager.isScanning){
                     GeometryReader { metrics in
                         HStack{
@@ -213,7 +225,7 @@ struct DeviceView: View {
                             } label: {
                                 
                                 
-                                Text("Log File")
+                                Label("Load file", systemImage: "doc")
                                     .frame(maxWidth: metrics.size.width * 0.45)
                                     .padding(.vertical, 15)
                                     .font(.system(size: 24, weight: .bold, design: .default))
@@ -229,7 +241,7 @@ struct DeviceView: View {
                         
                     }
                     .disabled(loadedFile)
-                    .frame(maxHeight : 120)
+                    .frame(maxHeight : 70)
                     
                 }else if (bleManager.isScanning &&  !bleManager.isConnected){
                     Button(action: {

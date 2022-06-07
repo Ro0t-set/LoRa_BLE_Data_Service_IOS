@@ -159,6 +159,7 @@ struct DataView: View {
                 .frame( maxWidth: .infinity, alignment: .topLeading)
                 .padding(.top)
                 .padding(.horizontal)
+
             
             
             if bleManager.listOfMessage.count > 0{
@@ -167,21 +168,24 @@ struct DataView: View {
                     VStack{
                         Text("Sender: \(self.selectedsender)")
                             .frame( maxWidth: .infinity, alignment: .topLeading)
-                            .font(.caption)
+                            .font(.caption .bold())
                             .padding(.horizontal)
+                            .foregroundColor(Color(UIColor.darkGray))
                         Text("Data type: \(self.selectedDataType)")
                             .frame( maxWidth: .infinity, alignment: .topLeading)
-                            .font(.caption)
+                            .font(.caption .bold())
                             .padding(.horizontal)
+                            .foregroundColor(Color(UIColor.darkGray))
                         Text("Date filter: \(String(self.dateFilterIsOn))")
                             .frame( maxWidth: .infinity, alignment: .topLeading)
-                            .font(.caption)
+                            .font(.caption .bold())
                             .padding(.horizontal)
+                            .foregroundColor(Color(UIColor.darkGray))
 
                     }
                     
-                    VStack{
-    
+                    VStack(alignment: .trailing){
+
                     Button("Edit...", action:{
                         self.dropDownMenu.toggle()
 
@@ -190,6 +194,7 @@ struct DataView: View {
                     .padding(.horizontal)
                     .buttonStyle(.bordered)
                     .frame(alignment: .topTrailing)
+                    .shadow(radius: 3)
                     
                     
                     if  chartBarData?.count ?? 0 > 0 && self.selectedDataType != "None" && self.selectedsender != "None" {
@@ -201,6 +206,7 @@ struct DataView: View {
                         .padding(.horizontal)
                         .buttonStyle(.bordered)
                         .frame(alignment: .topTrailing)
+                        .shadow(radius: 3)
                     }else{
                         Text("")
                             .font(.caption)
@@ -212,6 +218,7 @@ struct DataView: View {
                     }.frame(alignment: .topTrailing)
                     
                 }.padding(.horizontal)
+
                 
 
                 
@@ -247,24 +254,29 @@ struct DataView: View {
                         HStack {
                             Text("Sender:")
                                 .frame(maxWidth: .infinity, alignment: .topLeading)
+                                .foregroundColor(Color(UIColor.darkGray))
                             Picker("Please choose a sender", selection: $selectedsender) {
                                 ForEach(senders, id: \.self) {
                                     Text($0)
                                 }
                             }.frame(alignment: .topLeading)
+                                .foregroundColor(Color(UIColor.darkGray))
                         }.padding(.horizontal)
                         .padding(.top)
+                        
                         
                         Divider()
                         
                         HStack {
                             Text("Data type:")
                                 .frame(maxWidth: .infinity, alignment: .topLeading)
+                                .foregroundColor(Color(UIColor.darkGray))
                             Picker("Please choose a Data type", selection: $selectedDataType) {
                                 ForEach(dataTypes, id: \.self) {
                                     Text($0)
                                 }
                             }.frame(alignment: .topLeading)
+                                .foregroundColor(Color(UIColor.darkGray))
                             
                             
                         }.padding(.horizontal)
@@ -274,6 +286,7 @@ struct DataView: View {
                         HStack {
                             VStack{
                                 Text("Date range")
+                                    .foregroundColor(Color(UIColor.darkGray))
                                 Toggle("", isOn: $dateFilterIsOn).padding()
                                 
                             }
@@ -327,6 +340,7 @@ struct DataView: View {
                     .foregroundColor(Color.red)
                     .padding()
                 Text("Connect a device or import data").padding()
+                    .foregroundColor(Color(UIColor.darkGray))
                 
             }
             

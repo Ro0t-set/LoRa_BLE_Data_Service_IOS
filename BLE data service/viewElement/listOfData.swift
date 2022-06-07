@@ -19,6 +19,7 @@ struct listOfData: View {
                     if self.selectedsender == "None"{
                         Text("Sender: \(message.sender)")
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Color(UIColor.darkGray))
                     }
                     
                     Spacer()
@@ -27,10 +28,12 @@ struct listOfData: View {
                         if self.selectedDataType == "None"{
                             Text("\(message.getKey()): \(message.getValue())")
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(Color(UIColor.darkGray))
                         }else{
                         
                         Text(String(message.getValue()))
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Color(UIColor.darkGray))
                             
                         }
                         Spacer()

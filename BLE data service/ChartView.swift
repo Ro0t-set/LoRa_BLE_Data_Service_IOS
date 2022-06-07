@@ -134,6 +134,7 @@ struct ChartView: View {
                     .foregroundColor(Color.red)
                     .padding()
                 Text("Connect a device or import data").padding()
+                    .foregroundColor(Color(UIColor.darkGray))
                 
             }
             
