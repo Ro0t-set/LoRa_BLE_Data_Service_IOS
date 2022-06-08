@@ -11,33 +11,43 @@ import SwiftUI
 struct MainView: View {
     @ObservedObject var bleManager = BLEManager.shared()
     @State private var selectedTab = "device"
-    
     @State private var oldDataNumber : Int = 0
     @State private var oldGPSDataNumber : Int = 0
     
+    func getNotificationNumber(newDataCount : Int, oldDataCount: Int, tabName : String) -> Int{
+        if selectedTab != tabName{
+            if newDataCount + 1  < oldDataCount && self.bleManager.isConnected{
+                return newDataCount
+            }
+            if  !self.bleManager.isConnected && (newDataCount - oldDataCount) < 0 || !self.bleManager.isConnected && newDataCount>0 && (newDataCount - oldDataCount) != 0{
+                return newDataCount
+            }
+            return newDataCount - oldDataCount
+            
+        }
+        return 0
+    }
     
     
     var newData : Int {
         get{
-            return bleManager.listOfMessage.count - oldDataNumber
+            getNotificationNumber(newDataCount: self.bleManager.listOfMessage.count, oldDataCount: oldDataNumber, tabName: "data")
         }
     }
     
     
     var newGPSData : Int {
         get{
-            return bleManager.messagefilterByDataType(dataType: "'GPS'").count - oldGPSDataNumber
+            getNotificationNumber(newDataCount: bleManager.messagefilterByDataType(dataType: "'GPS'").count, oldDataCount: oldGPSDataNumber, tabName: "map")
         }
     }
+    
+    
     
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
         
-        if bleManager.listOfMessage.count == 0{
-            oldDataNumber = 0
-            oldGPSDataNumber = 0
-        }
         
     }
     
@@ -48,19 +58,27 @@ struct MainView: View {
                 .tabItem{
                     Label("Device", systemImage: "ferry")
                 }.tag("device")
+                .onAppear{
+                    if self.bleManager.listOfMessage.count == 0{
+                        self.oldDataNumber = 0
+                        self.oldGPSDataNumber = 0
+                    }
+                }
+
             
             
             
             DataView()
                 .tabItem{
                 Label("Data", systemImage: "chart.bar.doc.horizontal")
-            }
+                }
                 .badge(self.newData)
                 .tag("data")
                 .onAppear{
-                    if selectedTab == "data"{
-                        oldDataNumber  =  bleManager.listOfMessage.count
-                    }
+                    self.oldDataNumber  =  bleManager.listOfMessage.count
+                }
+                .onDisappear{
+                    self.oldDataNumber = bleManager.listOfMessage.count
                 }
                 
             
@@ -76,9 +94,10 @@ struct MainView: View {
             .tag("map")
             .badge(newGPSData)
             .onAppear{
-                if selectedTab == "map"{
-                    oldGPSDataNumber  =  bleManager.messagefilterByDataType(dataType: "'GPS'").count
-                }
+                self.oldGPSDataNumber  =  bleManager.messagefilterByDataType(dataType: "'GPS'").count
+            }
+            .onDisappear{
+                self.oldGPSDataNumber  =  bleManager.messagefilterByDataType(dataType: "'GPS'").count
             }
             
             

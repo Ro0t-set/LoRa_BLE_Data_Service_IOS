@@ -53,49 +53,49 @@ struct DeviceView: View {
             
             if self.loadedFile  {
                 withAnimation{
-                VStack{
-                Label("File uploaded successfully", systemImage: "doc")
-                    .font(.title3 .bold())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color.green)
-                    .padding()
-                    
-  
-                    
-                    Text("""
+                    VStack{
+                        Label("File uploaded successfully", systemImage: "doc")
+                            .font(.title3 .bold())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Color.green)
+                            .padding()
+                        
+                        
+                        
+                        Text("""
                          From: \(self.bleManager.listOfMessage.first!.getDataAsString())
                          """)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                         .foregroundColor(Color(UIColor.darkGray))
-                    
-                    Text("""
+                        
+                        Text("""
                          to: \(self.bleManager.listOfMessage.last!.getDataAsString())
                          """)
                         .frame(maxWidth: .infinity,  alignment: .leading)
                         .padding()
                         .foregroundColor(Color(UIColor.darkGray))
-                    
-                Button(action: {
-                    self.bleManager.listOfMessage = [ ]
-                    self.loadedFile.toggle()
-                    }) {
-                        Text("Unlink file")
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .font(.system(size: 24, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
-                            .background(Color(UIColor.systemRed))
-                            .cornerRadius(10)
-
-                    }.padding()
-                
-                    
-                }
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(radius: 3)
-                .frame(maxWidth: .infinity)
+                        
+                        Button(action: {
+                            self.bleManager.listOfMessage = [ ]
+                            self.loadedFile.toggle()
+                        }) {
+                            Text("Unlink file")
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 24, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .background(Color(UIColor.systemRed))
+                                .cornerRadius(10)
+                            
+                        }.padding()
+                        
+                        
+                    }
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 3)
+                    .frame(maxWidth: .infinity)
                 }
                 
             }
@@ -104,27 +104,27 @@ struct DeviceView: View {
             
             
             if !self.bleManager.isConnected {
-                
-                VStack{
-                    
-                    ForEach(bleManager.peripherals) { peripheral in
-                        HStack {
-                            Text(peripheral.name)
-                                .padding(.horizontal, 30)
-                                .font(.system(size: 45, weight: .bold, design: .default))
-                            Spacer()
-                            Text(String(peripheral.rssi))
-                                .padding(.horizontal, 30)
-                                .padding(.vertical, 50)
+                if !self.loadedFile{
+                    VStack{
+                        
+                        ForEach(bleManager.peripherals) { peripheral in
+                            HStack {
+                                Text(peripheral.name)
+                                    .padding(.horizontal, 30)
+                                    .font(.system(size: 45, weight: .bold, design: .default))
+                                Spacer()
+                                Text(String(peripheral.rssi))
+                                    .padding(.horizontal, 30)
+                                    .padding(.vertical, 50)
+                            }
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .shadow(radius: 3)
+                            .onTapGesture {
+                                bleManager.connect(peripheral: peripheral.CBP)
+                            }
                         }
-                        .background(Color.white)
-                        .cornerRadius(20)
-                        .shadow(radius: 3)
-                        .onTapGesture {
-                            bleManager.connect(peripheral: peripheral.CBP)
-                        }
-                    }
-                }.frame(maxHeight: .infinity, alignment: .top)
+                    }.frame(maxHeight: .infinity, alignment: .top)}
             }else{
                 
                 VStack{
