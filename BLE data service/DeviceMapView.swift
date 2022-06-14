@@ -47,7 +47,7 @@ struct DeviceMapView: View {
         get{
             let datas = bleManager.messagefilterByDataType(dataType: "'GPS'")
             
-            
+            self.locationManager.startUpdatingLocation()
             return [Place(name: "me", latitude: userLatitude, longitude: userLongitude, date: Date(), aroundOfBleData: nil)] +
             datas.map{
                 Place(

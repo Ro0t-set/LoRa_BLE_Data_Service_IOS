@@ -23,18 +23,22 @@ class BLEData: NSObject, ObservableObject{
     
     init(data : String) {
         let dataArr : [String] = data.components(separatedBy: "=")
-        
-        let cleenData = dataArr[1]
-            .replacingOccurrences(of: "{", with: "")
-            .replacingOccurrences(of: "}", with: "")
-            .replacingOccurrences(of: " ", with: "")
-        
-        
-        
-        let cleenDataArr : [String] = cleenData.components(separatedBy: ":")
-        
-        self.message = cleenDataArr
-        self.sender = dataArr[0]
+        if dataArr.count == 2{
+            let cleenData = dataArr[1]
+                .replacingOccurrences(of: "{", with: "")
+                .replacingOccurrences(of: "}", with: "")
+                .replacingOccurrences(of: " ", with: "")
+            
+            
+            
+            let cleenDataArr : [String] = cleenData.components(separatedBy: ":")
+            
+            self.message = cleenDataArr
+            self.sender = dataArr[0]
+        }else{
+            self.message = ["state", "Loading Mesh..."]
+            self.sender = "Device"
+        }
         
 
     }

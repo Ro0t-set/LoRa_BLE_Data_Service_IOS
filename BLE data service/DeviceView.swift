@@ -34,12 +34,7 @@ struct DeviceView: View {
     }
     
     
-    func sendGPSDataInBLE(){
-        if sendGpsData{
-            self.bleManager.whrite(messageString: "{GPS:\(userLongitude),\(userLongitude)}")
-            
-        }
-    }
+
     
     
     
@@ -143,8 +138,12 @@ struct DeviceView: View {
                             Text("")
                                 .onReceive(GPSTimer) { _ in
                                     if sendGpsData{
+                                        self.locationManager.startUpdatingLocation()
                                         self.bleManager.whrite(messageString: "{'GPS':\(userLatitude), \(userLongitude)}")
+
                                     }
+                                    self.locationManager.stop()
+
                                 }
                         }
                         

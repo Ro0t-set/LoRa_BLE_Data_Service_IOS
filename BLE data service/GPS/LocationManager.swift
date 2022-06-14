@@ -21,21 +21,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    func startMonitoringSignificantLocationChanges(){
-        locationManager.stopUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
-    }
+
     
     func startUpdatingLocation() {
-        locationManager.stopMonitoringSignificantLocationChanges()
         locationManager.startUpdatingLocation()
     }
     
-    func stopAll(){
-        locationManager.stopMonitoringSignificantLocationChanges()
+    func stop(){
         locationManager.stopUpdatingLocation()
     }
 
