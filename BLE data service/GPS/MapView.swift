@@ -61,7 +61,9 @@ struct MapView: View {
                                 
                             }
                         
-                        if  self.info == place{
+                        if  self.info.date == place.date &&
+                                self.info.coordinate.latitude == place.coordinate.latitude &&
+                                self.info.coordinate.longitude == place.coordinate.longitude{
                             Circle()
                                 .strokeBorder(Color(randomColor(seed: place.name)), lineWidth:15)
                                 .frame(width: 25, height: 25)
